@@ -1,9 +1,19 @@
 #include<iostream>
 #include<string>
 #include<algorithm>
+#include<ctime>
+#include<sstream>
 
 using namespace std;
 
+// function to get current date
+string getCurrentDate(){
+    time_t now = time(0); // returns the current time in seconds since January 1, 1970
+    tm *ltm = localtime(&now); // converts that raw time_t into a human-readable local time structure
+    stringstream ss;
+    ss << (ltm->tm_mday) << "/" << (1 + ltm->tm_mon) << "/" << (1900 + ltm->tm_year);
+    return ss.str();
+}
 class Medicine{
 private:
     int medID;
