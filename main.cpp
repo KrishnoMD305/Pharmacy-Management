@@ -4,6 +4,17 @@
 
 using namespace std;
 
+class Medicine{
+private:
+    int medID;
+    string name;
+    string company;
+    double price;
+    int quantity;
+    string expiryDate;
+
+};
+
 class User{
 protected:
     int ID; 
