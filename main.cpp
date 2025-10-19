@@ -13,6 +13,31 @@ private:
     int quantity;
     string expiryDate;
 
+public:
+    // Constructor
+    Medicine(int id = 0, string medName = "", string comp = "", double medPrice = 0.0, int qty = 0, string expiry = "") : medID(id), name(medName), company(comp), price(medPrice), quantity(qty), expiryDate(expiry) {}
+
+    // Update stock after selling
+    bool updateStock(int soldQty) {
+        if (soldQty <= quantity) {
+            quantity -= soldQty;
+            return true;
+        }
+        return false;
+    }
+
+    // Add stock
+    void addStock(int addQty) {
+        quantity += addQty;
+    }
+
+    bool isLowStock() const {
+        if(quantity < 10){
+            return true;
+        }else{
+            return false;
+        }
+    }
 };
 
 class User{
