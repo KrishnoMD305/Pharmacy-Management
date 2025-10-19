@@ -145,7 +145,7 @@ private:
         ofstream file("medicines.txt");
         if (file.is_open()) {
             for (const auto& med : *medicineInventory) {
-                file << med.serialize() << endl;
+                //file << med.serialize() << endl;
             }
             file.close();
         }
