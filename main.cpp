@@ -3,6 +3,7 @@
 #include<algorithm>
 #include<ctime>
 #include<sstream>
+#include<iomanip>
 
 using namespace std;
 
@@ -70,6 +71,29 @@ public:
             return false;
         }
     }
+
+    // Checking expirary date of a medicine
+    bool isExpired() {
+        return isDateExpired(expiryDate);
+    }
+
+    void display(){
+        cout << left << setw(8) << medID << setw(20) << name<< setw(15) << company << setw(10) << fixed << setprecision(2) << price << setw(10) << quantity << setw(12) << expiryDate;
+        if (isExpired()) {
+            cout << " [EXPIRED]";
+        } else if (isLowStock()) {
+            cout << " [LOW STOCK]";
+        }
+        cout << endl;
+    }
+
+    // Getters
+    int getMedID() const { return medID; }
+    string getName() const { return name; }
+    string getCompany() const { return company; }
+    double getPrice() const { return price; }
+    int getQuantity() const { return quantity; }
+    string getExpiryDate() const { return expiryDate; }
 };
 
 class User{
