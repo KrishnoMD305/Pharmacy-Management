@@ -90,7 +90,7 @@ public:
     }
 
     // Serialize the strings
-    string serialize() {
+    string serialize() const {
         stringstream ss;
         ss << medID << "," << name << "," << company << "," << price << "," << quantity << "," << expiryDate;
         return ss.str();
@@ -145,11 +145,30 @@ private:
         ofstream file("medicines.txt");
         if (file.is_open()) {
             for (const auto& med : *medicineInventory) {
-                //file << med.serialize() << endl;
+                file << med.serialize() << endl;
             }
             file.close();
         }
     }
+
+public:
+    Admin(int userId, string userName, string userContact, vector<Medicine>* inventory) : User(userId, userName, userContact), medicineInventory(inventory) {}
+
+    void display(){
+        cout << "\n";
+        cout << "╔════════════════════════════════════╗" << endl;
+        cout << "║         ADMIN MENU                 ║" << endl;
+        cout << "╚════════════════════════════════════╝" << endl;
+        cout << "1. Add Medicine" << endl;
+        cout << "2. Remove Medicine" << endl;
+        cout << "3. Update Medicine" << endl;
+        cout << "4. View Inventory" << endl;
+        cout << "5. View Reports" << endl;
+        cout << "6. Check Expiry & Low Stock Alerts" << endl;
+        cout << "7. Logout" << endl;
+        cout << "Enter choice: ";
+    }
+    
 };
 
 class Pharmacy_system{
