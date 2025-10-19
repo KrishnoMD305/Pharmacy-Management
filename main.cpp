@@ -8,12 +8,34 @@ using namespace std;
 
 // function to get current date
 string getCurrentDate(){
-    time_t now = time(0); // returns the current time in seconds since January 1, 1970
+    time_t now = time(0); // returns the current time in seconds since January 1, 1900
     tm *ltm = localtime(&now); // converts that raw time_t into a human-readable local time structure
     stringstream ss;
     ss << (ltm->tm_mday) << "/" << (1 + ltm->tm_mon) << "/" << (1900 + ltm->tm_year);
     return ss.str();
 }
+
+// Function to check expire date of a medicine
+bool isDateExpired(string& expiryDate){
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+    int currentDay = ltm->tm_mday;
+    int currentMonth = 1 + ltm->tm_mon;
+    int currentYear = 1900 + ltm->tm_year;
+
+    // Extract the expiry date
+    int day, month, year;
+    char slash;
+    stringstream ss(expiryDate);
+    ss >> day >> slash >> month >> slash >> year;
+
+    // Comparing dates
+    if (year < currentYear) return true;
+    if (year == currentYear && month < currentMonth) return true;
+    if (year == currentYear && month == currentMonth && day < currentDay) return true;
+    return false;
+}
+
 class Medicine{
 private:
     int medID;
