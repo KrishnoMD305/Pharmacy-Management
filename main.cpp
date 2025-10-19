@@ -1,7 +1,19 @@
 #include<iostream>
+#include<string>
+#include<algorithm>
 
 using namespace std;
 
+class User{
+protected:
+    int ID; 
+    string name;
+    string contact;
+    bool loggedin;
+public:
+    
+
+};
 
 class Pharmacy_system{
     private:
