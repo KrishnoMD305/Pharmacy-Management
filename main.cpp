@@ -11,7 +11,28 @@ protected:
     string contact;
     bool loggedin;
 public:
-    
+    User(int userID=0, string username="", string usercontact="") : ID(userID),name(username),contact(usercontact), loggedin(false) {}
+
+    ~User(){}
+
+    bool login(int userId, const string& password) {
+        if (userId == ID) {
+            loggedin = true;
+            cout << "\n✓ Login successful! Welcome, " << name << endl;
+            return true;
+        }
+        return false;
+    }
+
+    void logout() {
+        loggedin = false;
+        cout << "\n✓ Logged out successfully!" << endl;
+    }
+
+    int getId() { return ID; }
+    string getName() { return name; }
+    string getContact() { return contact; }
+    bool isLoggedIn() { return loggedin; }
 
 };
 
