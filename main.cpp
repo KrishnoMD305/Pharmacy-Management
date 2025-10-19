@@ -4,6 +4,8 @@
 #include<ctime>
 #include<sstream>
 #include<iomanip>
+#include<vector>
+#include<fstream>
 
 using namespace std;
 
@@ -87,13 +89,20 @@ public:
         cout << endl;
     }
 
+    // Serialize the strings
+    string serialize() {
+        stringstream ss;
+        ss << medID << "," << name << "," << company << "," << price << "," << quantity << "," << expiryDate;
+        return ss.str();
+    }
+
     // Getters
-    int getMedID() const { return medID; }
-    string getName() const { return name; }
-    string getCompany() const { return company; }
-    double getPrice() const { return price; }
-    int getQuantity() const { return quantity; }
-    string getExpiryDate() const { return expiryDate; }
+    int getMedID() { return medID; }
+    string getName() { return name; }
+    string getCompany() { return company; }
+    double getPrice() { return price; }
+    int getQuantity() { return quantity; }
+    string getExpiryDate() { return expiryDate; }
 };
 
 class User{
@@ -126,6 +135,21 @@ public:
     string getContact() { return contact; }
     bool isLoggedIn() { return loggedin; }
 
+};
+
+
+class Admin : public User {
+private:
+    vector<Medicine>* medicineInventory; 
+    void saveMedicinesToFile() {
+        ofstream file("medicines.txt");
+        if (file.is_open()) {
+            for (const auto& med : *medicineInventory) {
+                file << med.serialize() << endl;
+            }
+            file.close();
+        }
+    }
 };
 
 class Pharmacy_system{
