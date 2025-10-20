@@ -97,12 +97,12 @@ public:
     }
 
     // Getters
-    int getMedID() { return medID; }
-    string getName() { return name; }
-    string getCompany() { return company; }
-    double getPrice() { return price; }
-    int getQuantity() { return quantity; }
-    string getExpiryDate() { return expiryDate; }
+    int getMedID() const { return medID; }
+    string getName() const { return name; }
+    string getCompany() const { return company; }
+    double getPrice() const { return price; }
+    int getQuantity() const { return quantity; }
+    string getExpiryDate() const { return expiryDate; }
 };
 
 class User{
@@ -174,6 +174,37 @@ public:
         int id, qty;
         string name, company, expiry;
         double price;
+
+        cout << "\n--- Add New Medicine ---" << endl;
+        cout << "Enter Medicine ID: ";
+        cin >> id;
+        cin.ignore();
+
+        // Checking if medicine is already exists 
+        for (const auto& med : *medicineInventory) {
+            if (med.getMedID() == id) {
+                cout << "✗ Error: Medicine with ID " << id << " already exists!" << endl;
+                return;
+            }
+        }
+
+        cout << "Enter Medicine Name: ";
+        getline(cin, name);
+        cout << "Enter Company: ";
+        getline(cin, company);
+        cout << "Enter Price: $";
+        cin >> price;
+        cout << "Enter Quantity: ";
+        cin >> qty;
+        cin.ignore();
+        cout << "Enter Expiry Date (DD/MM/YYYY): ";
+        getline(cin, expiry);
+
+        Medicine newMed(id, name, company, price, qty, expiry);
+        medicineInventory->push_back(newMed); // Adding 
+
+        cout << "✓ Medicine added successfully!" << endl;
+        saveMedicinesToFile();
     }
 
 };
