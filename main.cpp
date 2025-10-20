@@ -170,6 +170,7 @@ public:
         cout << "Enter choice: ";
     }
     
+    // Adding medicine
     void addMedicine(){
         int id, qty;
         string name, company, expiry;
@@ -207,6 +208,17 @@ public:
         saveMedicinesToFile();
     }
 
+
+    // Remove Medicine
+    void removeMedicine(){
+        int id;
+        cout << "\n--- Remove Medicine ---" << endl;
+        cout << "Enter Medicine ID to remove: ";
+        cin >> id;
+
+        // Search medicine
+        auto it = remove_if(medicineInventory->begin(), medicineInventory->end(), [id](const Medicine& med) { return med.getMedID() == id; });
+    }
 };
 
 class Pharmacy_system{
