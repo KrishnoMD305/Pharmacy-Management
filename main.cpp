@@ -154,6 +154,7 @@ private:
 public:
     Admin(int userId, string userName, string userContact, vector<Medicine>* inventory) : User(userId, userName, userContact), medicineInventory(inventory) {}
 
+    // Display Admin menu
     void display(){
         cout << "\n";
         cout << "╔════════════════════════════════════╗" << endl;
@@ -169,6 +170,12 @@ public:
         cout << "Enter choice: ";
     }
     
+    void addMedicine(){
+        int id, qty;
+        string name, company, expiry;
+        double price;
+    }
+
 };
 
 class Pharmacy_system{
