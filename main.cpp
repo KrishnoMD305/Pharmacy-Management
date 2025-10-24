@@ -825,6 +825,29 @@ public:
             cout << "\n Please remove these expired medicines from inventory!" << endl;
         }
     }
+
+    // For showing Inventory
+    void viewInventory()const{
+        cout << "\n╔════════════════════════════════════════════════════════════════════════════════╗" << endl;
+        cout << "║                           MEDICINE INVENTORY                                   ║" << endl;
+        cout << "╚════════════════════════════════════════════════════════════════════════════════╝" << endl;
+
+        if(medicineInventory->empty()){
+            cout << "\nNo medicines in inventory!" << endl;
+            return;
+        }
+
+        cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << "Status" << endl;
+        cout << string(95, '-') << endl;
+
+        for(const auto& med : *medicineInventory){
+            med.display();
+        }
+
+        cout << "\nTotal Medicines: " << medicineInventory->size() << endl;
+    }
+
+
 };
 
 class PharmacySystem{
@@ -914,7 +937,31 @@ private:
     // Pharmacist menu operation
     void pharmacistMenu(){
         while(pharmacist->isLoggedIn()){
+            pharmacist->showMenu();
 
+            int choice;
+            cin >> choice;
+            cin.ignore();
+
+            switch (choice) {
+                case 1:
+                    pharmacist->sellMedicine();
+                    break;
+                case 2:
+                    pharmacist->searchMedicine();
+                    break;
+                case 3:
+                    pharmacist->viewInventory();
+                    break;
+                case 4:
+                    pharmacist->checkExpiry();
+                    break;
+                case 5:
+                    pharmacist->logout();
+                    break;
+                default:
+                    cout << "\n✗ Invalid choice!" << endl;
+            }
         }
     }
 public:
