@@ -466,9 +466,15 @@ private:
     vector<Customer>* customerList;
     int invoiceCounter;
 
-    
+    // Save medicines to file
     void saveMedicinesToFile()const{
-
+        ofstream file("medicines.txt");
+        if (file.is_open()){
+            for (const auto& med : *medicineInventory) {
+                file << med.serialize() << endl;
+            }
+            file.close();
+        }
     }
 };
 
