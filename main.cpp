@@ -750,6 +750,11 @@ private:
             cout << "Enter choice: ";
         }
 
+
+    // Admin loging operation
+    void adminLogin(){
+
+    }
 public:
     // Constructor
     PharmacySystem(){
@@ -757,7 +762,7 @@ public:
         admin = new Admin(23070, "CSE_23", "015", &medicineInventory);
         pharmacist = new Pharmacist(2307090, "Ritovash Chanda", "01615058161", &medicineInventory, &customerList);
 
-        
+
     }
 
 };
