@@ -551,7 +551,57 @@ public:
 
     // Sell medicine method for customers
     void sellMedicine(){
+        string custName, custPhone;
+        int custID = 0;
+        bool isExistingCustomer = false;
+        Customer* currentCustomer = nullptr;
 
+        cout << "\n--- Sell Medicine ---" << endl;
+        cout << "Is this an existing customer? (y/n): ";
+        char choice;
+        cin >> choice;
+        cin.ignore();
+
+        if(choice == 'y' || choice == 'Y'){
+            cout << "Enter Customer Phone: ";
+            getline(cin, custPhone); // For searching
+
+            // Searching for existing customer
+            for(auto& cust : *customerList){
+                if(cust.getPhone() == custPhone){
+                    isExistingCustomer = true;
+                    currentCustomer = &cust;
+                    custID = cust.getCustID();
+                    custName = cust.getName();
+                    cout << "✓ Customer found: " << custName << endl;
+                    break;
+                }
+            }
+
+            if (!isExistingCustomer) {
+                cout << "✗ Customer not found. Creating new customer..." << endl;
+            }
+        }
+
+        // Creating new customers if not existed
+        if(!isExistingCustomer){
+            custID = customerList->size() + 1;
+            cout << "Enter Customer Name: ";
+            getline(cin, custName);
+            cout << "Enter Customer Phone: ";
+            getline(cin, custPhone);
+
+            Customer newCust(custID, custName, custPhone, 0);
+            customerList->push_back(newCust);
+            currentCustomer = &customerList->back();
+            saveCustomersToFile();
+        }
+
+        // Create Invoice
+        Invoice invoice(invoiceCounter++, custName);
+
+        // Add medicines to invoice
+        char addMore = 'y';
     }
 };
 
