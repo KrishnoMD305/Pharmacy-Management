@@ -535,6 +535,24 @@ public:
     Pharmacist(int userId, string userName, string userContact, vector<Medicine>* inventory, vector<Customer>* customers) : User(userId, userName, userContact), medicineInventory(inventory), customerList(customers), invoiceCounter(1001) {
         loadInvoiceCounter();
     }
+
+    // Show Menubar
+    void showMenu(){
+        cout << "\n╔════════════════════════════════════╗" << endl;
+        cout << "║       PHARMACIST MENU              ║" << endl;
+        cout << "╚════════════════════════════════════╝" << endl;
+        cout << "1. Sell Medicine" << endl;
+        cout << "2. Search Medicine" << endl;
+        cout << "3. View Inventory" << endl;
+        cout << "4. Check Expiry" << endl;
+        cout << "5. Logout" << endl;
+        cout << "Enter choice: ";
+    }
+
+    // Sell medicine method for customers
+    void sellMedicine(){
+
+    }
 };
 
 class Pharmacy_system{
