@@ -146,7 +146,25 @@ public:
 
 
 class Invoice{
-    
+private: 
+    int invoiceID;
+    string customerName;
+    string date;
+    vector<pair<Medicine, int>> items; // Medicine and quantity
+    double totalAmount;
+    double discountAmount;
+    double finalAmount;
+public:
+    // Constructors
+    Invoice(int id, const string& custName) : invoiceID(id), customerName(custName), totalAmount(0.0), discountAmount(0.0), finalAmount(0.0) {
+        date = getCurrentDate();
+    }
+
+    // Adding item to invoice
+    void addItem(const Medicine& med, int qty) {
+        items.push_back(make_pair(med, qty));
+        totalAmount += med.getPrice() * qty;
+    }
 };
 
 class Admin : public User {
