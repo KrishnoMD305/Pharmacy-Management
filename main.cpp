@@ -1086,5 +1086,8 @@ int main(){
     cout << "║                                                        ║" << endl;
     cout << "╚════════════════════════════════════════════════════════╝" << endl;
     cout << "\n";
+
+    PharmacySystem system;
+    system.run();
     return 0;
 }
