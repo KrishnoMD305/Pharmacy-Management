@@ -188,6 +188,24 @@ public:
     double getFinalAmount() const {
         return discountAmount > 0 ? finalAmount : totalAmount;
     }
+
+    // Printing Invoice to console
+    void printInvoice() const{
+        cout << "\n";
+        cout << "╔════════════════════════════════════════════════════════════╗" << endl;
+        cout << "║              PHARMACY MANAGEMENT SYSTEM                    ║" << endl;
+        cout << "║                    INVOICE                                 ║" << endl;
+        cout << "╚════════════════════════════════════════════════════════════╝" << endl;
+        cout << "\nInvoice ID: " << invoiceID << endl;
+        cout << "Date: " << date << endl;
+        cout << "Customer: " << customerName << endl;
+        cout << "\n" << string(60, '-') << endl;
+
+        cout << left << setw(20) << "Medicine" << setw(10) << "Price" << setw(10) << "Quantity" << setw(15) << "Subtotal" << endl;
+
+        
+
+    }
 };
 
 class Admin : public User {
