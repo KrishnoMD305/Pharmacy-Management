@@ -859,7 +859,12 @@ private:
         cout << "Enter Password: ";
         getline(cin, password);
 
-        
+        // Brute force authentication for admin log in 
+        if(admin->login(id, password)){
+            adminMenu();
+        }else{
+            cout << "\n Invalid credentials!" << endl;
+        }
 
 
     }
