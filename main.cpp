@@ -864,7 +864,15 @@ private:
 
     // Admin menu operation
     void adminMenu(){
+        while(admin->isLoggedIn()){
+            admin->display();
 
+            int choice;
+            cin >> choice;
+            cin.ignore();
+
+            
+        }
     }
 public:
     // Constructor
