@@ -219,6 +219,12 @@ public:
         // Search medicine
         auto it = remove_if(medicineInventory->begin(), medicineInventory->end(), [id](const Medicine& med) { return med.getMedID() == id; });
     }
+
+    // Update medicine details
+    void updatemedicine(){
+        
+    }
+
 };
 
 class Pharmacy_system{
