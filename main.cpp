@@ -168,6 +168,26 @@ public:
         if (purchaseCount >= 5) return 5.0;
         return 0.0;
     }
+
+    // Show customer Info
+    void display()const{
+        cout << "Customer ID: " << custID << endl;
+        cout << "Name: " << name << endl;
+        cout << "Phone: " << phone << endl;
+        cout << "Total Purchases: " << purchaseCount << endl;
+
+        // Discount checking
+        if (isEligibleForDiscount()) {
+            cout << "Discount: " << getDiscountPercentage() << "%" << endl;
+        }
+
+    }
+
+    // Getters
+    int getCustID()const{ return custID; }
+    string getName()const{ return name; }
+    string getPhone()const{ return phone; }
+    int getPurchaseCount()const{ return purchaseCount; }
 };
 
 class Invoice{
