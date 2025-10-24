@@ -905,6 +905,18 @@ private:
             }
         }
     }
+
+    // Pharmacist login operation
+    void pharmacistLogin(){
+
+    }
+
+    // Pharmacist menu operation
+    void pharmacistMenu(){
+        while(pharmacist->isLoggedIn()){
+
+        }
+    }
 public:
     // Constructor
     PharmacySystem(){
