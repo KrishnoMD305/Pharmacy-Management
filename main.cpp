@@ -271,6 +271,22 @@ public:
                         getline(cin, tempStr);
                         med.setName(tempStr);
                         break;
+                    case 2:
+                        cout << "Enter new company: ";
+                        getline(cin, tempStr);
+                        med.setCompany(tempStr);
+                        break;
+                    case 3:
+                        cout << "Enter new price: $";
+                        cin >> tempPrice;
+                        med.setPrice(tempPrice);
+                        break;
+                    case 4:
+                        cout << "Enter new quantity: ";
+                        cin >> tempQty;
+                        med.setQuantity(tempQty);
+                        break;
+                    
                 }
             }
         }
