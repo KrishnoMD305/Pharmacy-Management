@@ -500,8 +500,15 @@ private:
         }
     }
 
+    // Saving Customer information in file
     void saveCustomersToFile()const{
-        
+        ofstream file("customers.txt");
+        if (file.is_open()) {
+            for(const auto& cust : *customerList){
+                file << cust.serialize() << endl;
+            }
+            file.close();
+        }
     }
 };
 
