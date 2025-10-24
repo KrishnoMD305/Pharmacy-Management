@@ -222,7 +222,32 @@ public:
 
     // Update medicine details
     void updatemedicine(){
-        
+        int id;
+        cout << "\n--- Update Medicine ---" << endl;
+        cout << "Enter Medicine ID to update: ";
+        cin >> id;
+        cin.ignore();
+
+        bool found = false; 
+
+        for(auto& med : *medicineInventory){
+            if(med.getMedID() == id){
+                found = true;
+                cout << "\nCurrent Details:" << endl;
+                cout << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << endl;
+                med.display(); // Display details
+                
+                // Choices to perform
+                cout << "\nWhat do you want to update?" << endl;
+                cout << "1. Name" << endl;
+                cout << "2. Company" << endl;
+                cout << "3. Price" << endl;
+                cout << "4. Quantity" << endl;
+                cout << "5. Expiry Date" << endl;
+                cout << "6. Update All" << endl;
+                cout << "Enter choice: ";
+            }
+        }
     }
 
 };
