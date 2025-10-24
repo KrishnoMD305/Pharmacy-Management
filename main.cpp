@@ -459,6 +459,19 @@ public:
 
 };
 
+// Handles Medicine sells and customers interaction
+class Pharmacist : public User{
+private:
+    vector<Medicine>* medicineInventory;
+    vector<Customer>* customerList;
+    int invoiceCounter;
+
+    
+    void saveMedicinesToFile()const{
+
+    }
+};
+
 class Pharmacy_system{
     private:
         void display_Main_menu(){
