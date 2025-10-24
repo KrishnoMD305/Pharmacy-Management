@@ -103,6 +103,13 @@ public:
     double getPrice() const { return price; }
     int getQuantity() const { return quantity; }
     string getExpiryDate() const { return expiryDate; }
+
+    // Setters
+    void setName(const string& n) { name = n; }
+    void setCompany(const string& c) { company = c; }
+    void setPrice(double p) { price = p; }
+    void setQuantity(int q) { quantity = q; }
+    void setExpiryDate(const string& date) { expiryDate = date; }
 };
 
 class User{
@@ -246,6 +253,25 @@ public:
                 cout << "5. Expiry Date" << endl;
                 cout << "6. Update All" << endl;
                 cout << "Enter choice: ";
+
+                // Taking input for choices
+                int choice;
+                cin >> choice;
+                cin.ignore();
+
+                // For storing temporary info
+                string tempStr;
+                double tempPrice;
+                int tempQty;
+
+                // Selecting choices using switch
+                switch (choice){
+                    case 1:
+                        cout << "Enter new name: ";
+                        getline(cin, tempStr);
+                        med.setName(tempStr);
+                        break;
+                }
             }
         }
     }
