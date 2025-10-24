@@ -510,6 +510,27 @@ private:
             file.close();
         }
     }
+
+    // Load invoice from file
+    void loadInvoiceCounter(){
+        ifstream file("invoice_counter.txt");
+        if(file.is_open()){
+            file >> invoiceCounter;
+            file.close();
+        }
+    }
+
+    // Save invoice to file
+    void saveInvoiceCounter()const{
+        ofstream file("invoice_counter.txt");
+        if(file.is_open()){
+            file << invoiceCounter;
+            file.close();
+        }
+    }
+
+public:
+    
 };
 
 class Pharmacy_system{
