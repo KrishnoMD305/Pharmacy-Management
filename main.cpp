@@ -381,7 +381,7 @@ public:
     }
 
     // Update medicine details
-    void updatemedicine(){
+    void updateMedicine(){
         int id;
         cout << "\n--- Update Medicine ---" << endl;
         cout << "Enter Medicine ID to update: ";
@@ -859,6 +859,8 @@ private:
         cout << "Enter Password: ";
         getline(cin, password);
 
+        
+
 
     }
 
@@ -871,7 +873,31 @@ private:
             cin >> choice;
             cin.ignore();
 
-            
+            switch(choice){
+                case 1:
+                    admin->addMedicine();
+                    break;
+                case 2:
+                    admin->removeMedicine();
+                    break;
+                case 3:
+                    admin->updateMedicine();
+                    break;
+                case 4:
+                    admin->viewInventory();
+                    break;
+                case 5:
+                    admin->viewReports();
+                    break;
+                case 6:
+                    admin->checkAlerts();
+                    break;
+                case 7:
+                    admin->logout();
+                    break;
+                default:
+                    cout << "\n Invalid choice!" << endl;
+            }
         }
     }
 public:
