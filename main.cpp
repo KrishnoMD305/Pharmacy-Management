@@ -146,6 +146,15 @@ public:
 
 
 class Customer{
+private:
+    int custID;
+    string name;
+    string phone;
+    int purchaseCount; // For discount checking
+
+public:
+    // Constructor
+    Customer(int id = 0, string custName = "", string custPhone = "", int purchases = 0) : custID(id), name(custName), phone(custPhone), purchaseCount(purchases) {}
 
 };
 
