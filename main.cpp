@@ -145,6 +145,10 @@ public:
 };
 
 
+class Customer{
+
+};
+
 class Invoice{
 private: 
     int invoiceID;
