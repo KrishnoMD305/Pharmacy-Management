@@ -156,6 +156,18 @@ public:
     // Constructor
     Customer(int id = 0, string custName = "", string custPhone = "", int purchases = 0) : custID(id), name(custName), phone(custPhone), purchaseCount(purchases) {}
 
+    // Discount and purchasecount method
+    void incrementPurchase(){
+        purchaseCount++;
+    }
+    bool isEligibleForDiscount()const{
+        return purchaseCount >= 5;
+    }
+    double getDiscountPercentage()const{
+        if (purchaseCount >= 10) return 10.0;
+        if (purchaseCount >= 5) return 5.0;
+        return 0.0;
+    }
 };
 
 class Invoice{
