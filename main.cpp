@@ -516,8 +516,65 @@ public:
 
         cout << "\n" << left << setw(12) << "Invoice ID" << setw(20) << "Customer" << setw(15) << "Date" << setw(15) << "Amount" << endl;
         cout << string(62, '-') << endl;
+
+        while(getline(file, line)){
+            stringstream ss(line);
+            string token;
+            vector<string> tokens;
+
+            while (getline(ss, token, ',')) {
+                tokens.push_back(token);
+            }
+
+            if(tokens.size() == 6){
+                cout << left << setw(12) << tokens[0] << setw(20) << tokens[1] << setw(15) << tokens[2] << "$" << setw(14) << tokens[5] << endl;
+                totalSales += stod(tokens[5]);
+                totalInvoices++;
+            }
+        }
+        file.close();
+
+        cout << string(62, '-') << endl;
+        cout << "\nTotal Invoices: " << totalInvoices << endl;
+        cout << "Total Sales: $" << fixed << setprecision(2) << totalSales << endl;
     }
 
+    // checking alerts for low stock and expirary medicines
+    void checkAlerts() const{
+        cout << "\n╔════════════════════════════════════╗" << endl;
+        cout << "║      EXPIRY & STOCK ALERTS         ║" << endl;
+        cout << "╚════════════════════════════════════╝" << endl;
+
+        bool hasExpired = false;
+        bool hasLowStock = false;
+
+        cout << "\nEXPIRED MEDICINES:" << endl;
+        cout << string(80, '-') << endl;
+
+        for(const auto& med : *medicineInventory){
+            if (med.isExpired()) {
+                hasExpired = true;
+                cout << "ID: " << med.getMedID() << " | " << med.getName() << " | Expired on: " << med.getExpiryDate() << endl;
+            }
+        }
+        if(!hasExpired){
+            cout << "No expired medicines." << endl;
+        }
+
+        cout << "\nLOW STOCK MEDICINES (< 10 units):" << endl;
+        cout << string(80, '-') << endl;
+
+        for(const auto& med : *medicineInventory){
+            if (med.isLowStock() && !med.isExpired()) {
+                hasLowStock = true;
+                cout << "ID: " << med.getMedID() << " | " << med.getName() << " | Stock: " << med.getQuantity() << " units" << endl;
+            }
+        }
+
+        if(!hasLowStock){
+            cout << "No low stock items." << endl;
+        }
+    }
 
 };
 
