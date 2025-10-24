@@ -711,6 +711,11 @@ public:
             cout << "No medicines found matching '" << searchTerm << "'" << endl;
         }
     }
+
+    // Checks for expired medicines
+    void checkExpiry() const{
+
+    }
 };
 
 class Pharmacy_system{
