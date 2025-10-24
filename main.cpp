@@ -188,6 +188,29 @@ public:
     string getName()const{ return name; }
     string getPhone()const{ return phone; }
     int getPurchaseCount()const{ return purchaseCount; }
+
+    // Serialize the customer lists
+    string serialize() const {
+        stringstream ss;
+        ss << custID << "," << name << "," << phone << "," << purchaseCount;
+        return ss.str();
+    }
+
+    // Extract customer info from string
+    static Customer deserialize(const string& data) {
+        stringstream ss(data);
+        string token;
+        vector<string> tokens;
+
+        while (getline(ss, token, ',')) {
+            tokens.push_back(token);
+        }
+
+        if (tokens.size() == 4) {
+            return Customer( stoi(tokens[0]), tokens[1], tokens[2], stoi(tokens[3]));
+        }
+        return Customer();
+    }
 };
 
 class Invoice{
@@ -475,6 +498,10 @@ private:
             }
             file.close();
         }
+    }
+
+    void saveCustomersToFile()const{
+        
     }
 };
 
