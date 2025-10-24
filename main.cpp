@@ -915,6 +915,12 @@ public:
 
     }
 
+    // Destructor
+    ~PharmacySystem(){
+        delete admin;
+        delete pharmacist;
+    }
+
 };
 
 int main(){
