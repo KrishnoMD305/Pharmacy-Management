@@ -661,6 +661,20 @@ public:
 
         cout << "\n✓ Sale completed successfully!" << endl; // Conformation message
     }
+
+    // Method for searching medicine
+    void searchMedicine()const{
+        cout << "\n--- Search Medicine ---" << endl;
+        cout << "1. Search by Name" << endl;
+        cout << "2. Search by Company" << endl;
+        cout << "Enter choice: ";
+
+        int choice;
+        cin >> choice;
+        cin.ignore();
+
+        
+    }
 };
 
 class Pharmacy_system{
