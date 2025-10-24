@@ -96,6 +96,30 @@ public:
         return ss.str();
     }
 
+    // Deserialize from string
+    static Medicine deserialize(const string& data) {
+        stringstream ss(data);
+        string token;
+        vector<string> tokens;
+
+        while (getline(ss, token, ',')) {
+            tokens.push_back(token);
+        }
+
+        if (tokens.size() == 6) {
+            return Medicine(
+                stoi(tokens[0]),
+                tokens[1],
+                tokens[2],
+                stod(tokens[3]),
+                stoi(tokens[4]),
+                tokens[5]
+            );
+        }
+        return Medicine();
+    }
+
+
     // Getters
     int getMedID() const { return medID; }
     string getName() const { return name; }
@@ -979,6 +1003,37 @@ private:
             }
         }
     }
+
+    // Load Medicines Info from file
+    void loadMedicinesFromFile(){
+        ifstream file("medicines.txt");
+        if (file.is_open()) {
+            string line;
+            while (getline(file, line)) {
+                Medicine med = Medicine::deserialize(line);
+                if (med.getMedID() != 0) {
+                    medicineInventory.push_back(med);
+                }
+            }
+            file.close();
+        }
+    }
+    // Load Customers info from file
+    void loadCustomersFromFile(){
+        ifstream file("customers.txt");
+        if (file.is_open()) {
+            string line;
+            while (getline(file, line)) {
+                Customer cust = Customer::deserialize(line);
+                if (cust.getCustID() != 0) {
+                    customerList.push_back(cust);
+                }
+            }
+            file.close();
+        }
+    }
+
+
 public:
     // Constructor
     PharmacySystem(){
