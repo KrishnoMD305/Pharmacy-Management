@@ -703,7 +703,12 @@ public:
                 }
             }
         }else{
-            
+            cout << "Invalid choice!" << endl;
+            return;
+        }
+
+        if(!found){
+            cout << "No medicines found matching '" << searchTerm << "'" << endl;
         }
     }
 };
