@@ -731,9 +731,15 @@ public:
     }
 };
 
-class Pharmacy_system{
-    private:
-        void display_Main_menu(){
+class PharmacySystem{
+private:
+    vector<Medicine> medicineInventory;
+    vector<Customer> customerList;
+    Admin* admin;
+    Pharmacist* pharmacist;
+
+
+    void display_Main_menu(){
             cout<<"\n";
             cout << "╔════════════════════════════════════╗" << endl;
             cout << "║  PHARMACY MANAGEMENT SYSTEM        ║" << endl;
@@ -743,6 +749,17 @@ class Pharmacy_system{
             cout << "3. Exit" << endl;
             cout << "Enter choice: ";
         }
+
+public:
+    // Constructor
+    PharmacySystem(){
+        // Initializing Users
+        admin = new Admin(23070, "CSE_23", "015", &medicineInventory);
+        pharmacist = new Pharmacist(2307090, "Ritovash Chanda", "01615058161", &medicineInventory, &customerList);
+
+        
+    }
+
 };
 
 int main(){
