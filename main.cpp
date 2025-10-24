@@ -19,7 +19,7 @@ string getCurrentDate(){
 }
 
 // Function to check expire date of a medicine
-bool isDateExpired(string& expiryDate){
+bool isDateExpired(const string& expiryDate){
     time_t now = time(0);
     tm *ltm = localtime(&now);
     int currentDay = ltm->tm_mday;
@@ -75,11 +75,11 @@ public:
     }
 
     // Checking expirary date of a medicine
-    bool isExpired() {
+    bool isExpired()const{
         return isDateExpired(expiryDate);
     }
 
-    void display(){
+    void display()const{
         cout << left << setw(8) << medID << setw(20) << name<< setw(15) << company << setw(10) << fixed << setprecision(2) << price << setw(10) << quantity << setw(12) << expiryDate;
         if (isExpired()) {
             cout << " [EXPIRED]";
@@ -673,7 +673,38 @@ public:
         cin >> choice;
         cin.ignore();
 
-        
+        string searchTerm;
+        bool found = false;
+
+        if(choice == 1){
+            cout << "Enter Medicine Name: ";
+            getline(cin, searchTerm);
+
+            cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << endl;
+            cout << string(75, '-') << endl;
+
+            for (const auto& med : *medicineInventory) {
+                if (med.getName().find(searchTerm) != string::npos) {
+                    med.display();
+                    found = true;
+                }
+            }
+        }else if(choice == 2){
+            cout << "Enter Company Name: ";
+            getline(cin, searchTerm);
+
+            cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << endl;
+            cout << string(75, '-') << endl;
+
+            for(const auto& med : *medicineInventory){
+                if (med.getCompany().find(searchTerm) != string::npos) {
+                    med.display();
+                    found = true;
+                }
+            }
+        }else{
+            
+        }
     }
 };
 
