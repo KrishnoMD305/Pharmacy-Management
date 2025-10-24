@@ -530,7 +530,11 @@ private:
     }
 
 public:
-    
+
+    // Constructor
+    Pharmacist(int userId, string userName, string userContact, vector<Medicine>* inventory, vector<Customer>* customers) : User(userId, userName, userContact), medicineInventory(inventory), customerList(customers), invoiceCounter(1001) {
+        loadInvoiceCounter();
+    }
 };
 
 class Pharmacy_system{
