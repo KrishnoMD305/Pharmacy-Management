@@ -753,6 +753,21 @@ private:
 
     // Admin loging operation
     void adminLogin(){
+        int id;
+        string password;
+
+        cout << "\n--- Admin Login ---" << endl;
+        cout << "Enter Admin ID: ";
+        cin >> id;
+        cin.ignore();
+        cout << "Enter Password: ";
+        getline(cin, password);
+
+
+    }
+
+    // Admin menu operation
+    void adminMenu(){
 
     }
 public:
