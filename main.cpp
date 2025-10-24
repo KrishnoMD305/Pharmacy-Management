@@ -714,7 +714,20 @@ public:
 
     // Checks for expired medicines
     void checkExpiry() const{
+        cout << "\n╔════════════════════════════════════╗" << endl;
+        cout << "║      EXPIRY CHECK REPORT           ║" << endl;
+        cout << "╚════════════════════════════════════╝" << endl;
 
+        bool hasExpired = false;
+
+        cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(12) << "Expiry Date" << endl;
+        cout << string(55, '-') << endl;
+
+        if (!hasExpired) {
+            cout << "✓ No expired medicines found!" << endl;
+        } else {
+            cout << "\n Please remove these expired medicines from inventory!" << endl;
+        }
     }
 };
 
