@@ -882,7 +882,7 @@ private:
     Pharmacist* pharmacist;
 
 
-    void display_Main_menu(){
+    void displayMainMenu(){
             cout<<"\n";
             cout << "╔════════════════════════════════════╗" << endl;
             cout << "║  PHARMACY MANAGEMENT SYSTEM        ║" << endl;
@@ -1018,6 +1018,7 @@ private:
             file.close();
         }
     }
+    
     // Load Customers info from file
     void loadCustomersFromFile(){
         ifstream file("customers.txt");
@@ -1041,7 +1042,32 @@ public:
         admin = new Admin(23070, "CSE_23", "015", &medicineInventory);
         pharmacist = new Pharmacist(2307090, "Ritovash Chanda", "01615058161", &medicineInventory, &customerList);
 
+        loadMedicinesFromFile();
+        loadCustomersFromFile();
 
+    }
+
+    void run(){
+        while(true){
+            displayMainMenu();
+            int choice;
+            cin >> choice;
+            cin.ignore();
+
+            switch (choice){
+                case 1:
+                    adminLogin();
+                    break;
+                case 2:
+                    pharmacistLogin();
+                    break;
+                case 3:
+                    cout << "\n Thank you for using Pharmacy Management System!" << endl;
+                    return;
+                default:
+                    cout << "\n Invalid choice! Please try again." << endl;
+            }
+        }
     }
 
     // Destructor
