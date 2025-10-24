@@ -602,6 +602,46 @@ public:
 
         // Add medicines to invoice
         char addMore = 'y';
+
+        while(addMore == 'y' || addMore == 'Y'){
+            int medID, qty;
+
+            cout << "\nEnter Medicine ID: ";
+            cin >> medID;
+
+            bool found = false;
+            for(auto& med : *medicineInventory){
+                if(med.getMedID() == medID){
+                    found = true;
+
+                    // Expiry Checking
+                    if (med.isExpired()) {
+                        cout << "✗ Error: This medicine has expired!" << endl;
+                        break;
+                    }
+
+                }
+                cout << "Medicine: " << med.getName() << endl;
+                cout << "Available Quantity: " << med.getQuantity() << endl;
+                cout << "Price: $" << med.getPrice() << endl;
+                cout << "Enter Quantity to sell: ";
+                cin >> qty;
+
+                if(qty > med.getQuantity()){
+                    cout << "✗ Error: Insufficient stock!" << endl;
+                }else if (qty <= 0){
+                    cout << "✗ Error: Invalid quantity!" << endl;
+                }else{
+                    med.updateStock(qty);
+                    invoice.addItem(med, qty);
+                    cout << "✓ Added to invoice!" << endl;
+                }
+                break;
+            }
+            if(!found){
+                cout << "✗ Medicine with ID " << medID << " not found!" << endl;
+            }
+        }
     }
 };
 
