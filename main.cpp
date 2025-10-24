@@ -478,6 +478,45 @@ public:
         }
     }
 
+    // Viewing complete inventory
+    void viewInventory()const{
+        cout << "\n╔════════════════════════════════════════════════════════════════════════════════╗" << endl;
+        cout << "║                           MEDICINE INVENTORY                                   ║" << endl;
+        cout << "╚════════════════════════════════════════════════════════════════════════════════╝" << endl;
+
+        if(medicineInventory->empty()){
+            cout << "\nNo medicines in inventory!" << endl;
+            return;
+        }
+
+        cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << "Status" << endl;
+        cout << string(95, '-') << endl;
+        for(const auto& med : *medicineInventory){
+            med.display();
+        }
+
+        cout << "\nTotal Medicines: " << medicineInventory->size() << endl;
+    }
+
+    // Viewing sales summary repo
+    void viewReports()const{
+        cout << "\n╔════════════════════════════════════╗" << endl;
+        cout << "║         SALES REPORTS              ║" << endl;
+        cout << "╚════════════════════════════════════╝" << endl;
+
+        ifstream file("invoices.txt"); // Opening file
+        if(!file.is_open()){
+            cout << "\nNo sales data available!" << endl;
+            return;
+        }
+
+        double totalSales = 0.0;
+        int totalInvoices = 0;
+        string line;
+
+        cout << "\n" << left << setw(12) << "Invoice ID" << setw(20) << "Customer" << setw(15) << "Date" << setw(15) << "Amount" << endl;
+        cout << string(62, '-') << endl;
+    }
 
 
 };
