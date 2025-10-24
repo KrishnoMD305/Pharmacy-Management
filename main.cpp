@@ -165,6 +165,14 @@ public:
         items.push_back(make_pair(med, qty));
         totalAmount += med.getPrice() * qty;
     }
+    // Discount and generate bill
+    void applyDiscount(double discountPercent) {
+        discountAmount = totalAmount * (discountPercent / 100.0);
+        finalAmount = totalAmount - discountAmount;
+    }
+    void generateBill(double discountPercent = 0.0) {
+        applyDiscount(discountPercent);
+    }
 };
 
 class Admin : public User {
