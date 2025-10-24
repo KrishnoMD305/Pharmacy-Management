@@ -931,7 +931,22 @@ private:
 
     // Pharmacist login operation
     void pharmacistLogin(){
+        int id;
+        string password;
 
+        cout << "\n--- Pharmacist Login ---" << endl;
+        cout << "Enter Pharmacist ID: ";
+        cin >> id;
+        cin.ignore();
+        cout << "Enter Password: ";
+        getline(cin, password);
+
+        // Brute Force authentication for pharmacist log in
+        if(pharmacist->login(id, password)){
+            pharmacistMenu();
+        }else{
+            cout << "\n Invalid credentials!" << endl;
+        }
     }
 
     // Pharmacist menu operation
@@ -960,7 +975,7 @@ private:
                     pharmacist->logout();
                     break;
                 default:
-                    cout << "\n✗ Invalid choice!" << endl;
+                    cout << "\n Invalid choice!" << endl;
             }
         }
     }
