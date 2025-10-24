@@ -286,9 +286,42 @@ public:
                         cin >> tempQty;
                         med.setQuantity(tempQty);
                         break;
-                    
+                    case 5:
+                        cout << "Enter new expiry date (DD/MM/YYYY): ";
+                        getline(cin, tempStr);
+                        med.setExpiryDate(tempStr);
+                        break;
+                    case 6:
+                        cout << "Enter new name: ";
+                        getline(cin, tempStr);
+                        med.setName(tempStr);
+                        cout << "Enter new company: ";
+                        getline(cin, tempStr);
+                        med.setCompany(tempStr);
+                        cout << "Enter new price: $";
+                        cin >> tempPrice;
+                        med.setPrice(tempPrice);
+                        cout << "Enter new quantity: ";
+                        cin >> tempQty;
+                        med.setQuantity(tempQty);
+                        cin.ignore();
+                        cout << "Enter new expiry date (DD/MM/YYYY): ";
+                        getline(cin, tempStr);
+                        med.setExpiryDate(tempStr);
+                        break;
+                    default:
+                        cout << "Invalid choice!" << endl;
+                        return;
                 }
+
+                // Confirmation message
+                cout << "✓ Medicine updated successfully!" << endl;
+                saveMedicinesToFile();
+                break;
             }
+        }
+        if (!found) {
+            cout << "✗ Medicine with ID " << id << " not found!" << endl;
         }
     }
 
