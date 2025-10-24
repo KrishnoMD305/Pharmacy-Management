@@ -203,7 +203,29 @@ public:
 
         cout << left << setw(20) << "Medicine" << setw(10) << "Price" << setw(10) << "Quantity" << setw(15) << "Subtotal" << endl;
 
-        
+        cout << string(60, '-') << endl;
+
+        for(const auto& item : items){
+            Medicine med = item.first;
+            int qty = item.second;
+            double subtotal = med.getPrice() * qty;
+
+            // Showing the data
+            cout << left << setw(20) << med.getName() << setw(10) << fixed << setprecision(2) << med.getPrice() << setw(10) << qty << setw(15) << subtotal << endl;
+        }
+        cout << string(60, '-') << endl;
+        cout << right << setw(45) << "Total: $" << totalAmount << endl;
+
+        if(discountAmount > 0){
+            cout << right << setw(45) << "Discount: -$" << discountAmount << endl;
+            cout << right << setw(45) << "Final Amount: $" << finalAmount << endl;
+        }else{
+            cout << right << setw(45) << "Final Amount: $" << totalAmount << endl;
+        }
+
+        cout << string(60, '=') << endl;
+        cout << "\n      Thank you for your purchase!" << endl;
+        cout << string(60, '=') << endl << endl;
 
     }
 };
