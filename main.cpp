@@ -145,6 +145,10 @@ public:
 };
 
 
+class Invoice{
+    
+};
+
 class Admin : public User {
 private:
     vector<Medicine>* medicineInventory; 
@@ -324,6 +328,8 @@ public:
             cout << "✗ Medicine with ID " << id << " not found!" << endl;
         }
     }
+
+
 
 };
 
