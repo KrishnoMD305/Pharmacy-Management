@@ -641,7 +641,25 @@ public:
             if(!found){
                 cout << "✗ Medicine with ID " << medID << " not found!" << endl;
             }
+
+            cout << "\nAdd more medicines? (y/n): ";
+            cin >> addMore;
         }
+
+        // Generate and print invoice
+        double discount = currentCustomer->getDiscountPercentage();
+        invoice.generateBill(discount);
+        invoice.printInvoice();
+        invoice.saveToFile();
+
+        currentCustomer->incrementPurchase(); // Updating customer purchase count
+
+        // Save the updated data
+        saveMedicinesToFile();
+        saveCustomersToFile();
+        saveInvoiceCounter();
+
+        cout << "\n✓ Sale completed successfully!" << endl; // Conformation message
     }
 };
 
