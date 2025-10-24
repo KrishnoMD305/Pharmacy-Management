@@ -173,6 +173,21 @@ public:
     void generateBill(double discountPercent = 0.0) {
         applyDiscount(discountPercent);
     }
+
+    // Saving invoice to a file
+    void saveToFile() const{
+        ofstream file("invoices.txt", ios::app); // Append mode
+        if(file.is_open()){ // Writing to file
+            file << invoiceID << "," << customerName << "," << date << "," << totalAmount << "," << discountAmount << "," << (discountAmount > 0 ? finalAmount : totalAmount) << endl;
+            file.close();
+        }
+
+    }
+
+    // Getter
+    double getFinalAmount() const {
+        return discountAmount > 0 ? finalAmount : totalAmount;
+    }
 };
 
 class Admin : public User {
