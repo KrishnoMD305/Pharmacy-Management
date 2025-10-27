@@ -386,7 +386,8 @@ public:
         cout << "6. Check Expiry & Low Stock Alerts" << endl;
         cout << "7. Sort Medicines by Price" << endl;
         cout << "8. Restock Medicine" << endl;
-        cout << "9. Logout" << endl;
+        cout << "9. View Customer Loyalty Ranking" << endl;
+        cout << "10. Logout" << endl;
         cout << "Enter choice: ";
     }
     
@@ -719,6 +720,18 @@ public:
             cout << "\nNo customers in database!" << endl;
             return;
         }
+
+        vector<Customer> sortedCustomers = *customerList;
+        sort(sortedCustomers.begin(), sortedCustomers.end(), [](const Customer& a, const Customer& b){ return !(a < b); });
+
+        cout << "\n" << left << setw(8) << "Rank" << setw(12) << "Cust ID" << setw(20) << "Name" << setw(15) << "Phone" << setw(12) << "Purchases" << "Discount" << endl;
+        cout << string(85, '-') << endl;
+
+        int rank = 1;
+        for(const auto& cust : sortedCustomers){
+            cout << left << setw(8) << rank++ << setw(12) << cust.getCustID() << setw(20) << cust.getName() << setw(15) << cust.getPhone() << setw(12) << cust.getPurchaseCount() << cust.getDiscountPercentage() << "%" << endl;
+        }
+        cout << "\nTotal Customers: " << customerList->size() << endl;
 
     }
 
@@ -1074,6 +1087,9 @@ private:
                     admin->restockMedicine();
                     break;
                 case 9:
+                    admin->viewCustomerLoyaltyRanking();
+                    break;
+                case 10:
                     admin->logout();
                     break;
                 default:
