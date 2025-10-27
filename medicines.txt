@@ -5,3 +5,5 @@
 1005,Napa One,Beximco Pharmaceuticals Ltd.,1.8,1200,27/10/2030
 1006,Napa Rapid,Beximco Pharmaceuticals Ltd.,1.8,1200,27/10/2030
 1007,NapaDol,Beximco Pharmaceuticals Ltd.,1.8,1200,27/10/2030
+1008,Ciprofloxacin,Square Pharmaceuticals,5,1500,27/10/2030
+1009,Doxycycline,Square Pharmaceuticals,5.5,1500,27/10/2030
