@@ -138,7 +138,7 @@ public:
         return price > other.price;
     }
 
-
+    // Overloaded + operator 
     Medicine operator+(const Medicine& other)const{
         if(medID == other.medID){
             Medicine temp = *this;
@@ -147,6 +147,12 @@ public:
         }
         return *this;
     }
+
+    // Overloaded == operator
+    bool operator==(const Medicine& other) const {
+        return medID == other.medID;
+    }
+
 
     // Setters
     void setName(const string& n) { name = n; }
@@ -439,6 +445,15 @@ public:
 
         // Search medicine
         auto it = remove_if(medicineInventory->begin(), medicineInventory->end(), [id](const Medicine& med) { return med.getMedID() == id; });
+
+        // Removing medicine
+        if(it != medicineInventory->end()){
+            medicineInventory->erase(it, medicineInventory->end());
+            cout << "✓ Medicine removed successfully!" << endl;
+            saveMedicinesToFile();
+        }else{
+            cout << "✗ Medicine with ID " << id << " not found!" << endl;
+        }
     }
 
     // Update medicine details
