@@ -11,3 +11,6 @@
 1011,Lactameal,Beximco Pharmaceuticals Ltd.,2,1200,27/10/2030
 1012,Marlox Plus,Incepta Pharmaceuticals Ltd.,2,1200,27/10/2030
 1013,Xelosil,Everest Pharmaceuticals Ltd.,2,1200,27/10/2030
+1014,Tylenol,Johnson & Johnson,5,1400,27/10/2030
+1015,Panadol,GlaxoSmithKline,5,1400,27/10/2030
+1016,Ace,Square Pharmaceuticals,1,1500,27/10/2030
