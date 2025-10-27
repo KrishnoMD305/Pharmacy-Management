@@ -207,6 +207,13 @@ public:
 
     }
 
+    // Overloaded ++ operator
+    Customer& operator++(){
+        purchaseCount++;
+        return *this;
+    }
+
+
     // Getters
     int getCustID()const{ return custID; }
     string getName()const{ return name; }
