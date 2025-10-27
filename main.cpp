@@ -128,6 +128,26 @@ public:
     int getQuantity() const { return quantity; }
     string getExpiryDate() const { return expiryDate; }
 
+    // Overloading < operator for medicine
+    bool operator<(const Medicine& other)const{
+        return price < other.price;
+    }
+
+    // Overloading > operator for medicine
+    bool operator>(const Medicine& other)const{
+        return price > other.price;
+    }
+
+
+    Medicine operator+(const Medicine& other)const{
+        if(medID == other.medID){
+            Medicine temp = *this;
+            temp.quantity += other.quantity;
+            return temp;
+        }
+        return *this;
+    }
+
     // Setters
     void setName(const string& n) { name = n; }
     void setCompany(const string& c) { company = c; }
@@ -357,7 +377,9 @@ public:
         cout << "4. View Inventory" << endl;
         cout << "5. View Reports" << endl;
         cout << "6. Check Expiry & Low Stock Alerts" << endl;
-        cout << "7. Logout" << endl;
+        cout << "7. Sort Medicines by Price" << endl;
+        cout << "8. Restock Medicine" << endl;
+        cout << "9. Logout" << endl;
         cout << "Enter choice: ";
     }
     
@@ -606,6 +628,81 @@ public:
             cout << "No low stock items." << endl;
         }
     }
+
+    // For sorting medicine (< and > overloaded used for medicine)
+    void sortMedicinesByPrice(){
+        if(medicineInventory->empty()){
+            cout << "\nNo medicines in inventory!" << endl;
+            return;
+        }
+
+        cout << "\n--- Sort Medicines by Price ---" << endl;
+        cout << "1. Sort by Price (Low to High)" << endl;
+        cout << "2. Sort by Price (High to Low)" << endl;
+        cout << "Enter choice: ";
+
+        int choice;
+        cin >> choice;
+        cin.ignore();
+
+        vector<Medicine> sortedList = *medicineInventory;
+
+        // Overloaded operator is used here
+        if(choice == 1){
+            sort(sortedList.begin(), sortedList.end());
+            cout << "\n✓ Medicines sorted by price (Low to High):" << endl;
+        }else if(choice == 2){
+            sort(sortedList.begin(), sortedList.end(), [](const Medicine& a, const Medicine& b){ return a > b; });
+            cout << "\n✓ Medicines sorted by price (High to Low):" << endl;
+        }else{
+            cout << "Invalid choice!" << endl;
+            return;
+        }
+
+        cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << endl;
+        cout << string(85, '-') << endl;
+
+        for(const auto& med : sortedList){
+            cout << left << setw(8) << med.getMedID() << setw(20) << med.getName() << setw(15) << med.getCompany() << setw(10) << fixed << setprecision(2) << med.getPrice() << setw(10) << med.getQuantity() << setw(12) << med.getExpiryDate() << endl;
+        }
+
+    }
+
+    // For restocking (Overloaded the + operator)
+    void restockMedicine(){
+        int id, addQty;
+
+        cout << "\n--- Restock Medicine (Using Operator+) ---" << endl;
+        cout << "Enter Medicine ID to restock: ";
+        cin >> id;
+        cin.ignore();
+
+        bool found = false;
+
+        for(auto& med : *medicineInventory){
+            if(med.getMedID() == id){
+                found = true;
+                cout << "\nCurrent Stock: " << med.getQuantity() << " units" << endl;
+                cout << "Enter quantity to add: ";
+                cin >> addQty;
+                cin.ignore();
+
+                Medicine additionalStock(id, med.getName(), med.getCompany(), med.getPrice(), addQty, med.getExpiryDate());
+                Medicine restocked = med + additionalStock;
+                med = restocked;
+
+                cout << "✓ Medicine restocked successfully!" << endl;
+                cout << "New Stock: " << med.getQuantity() << " units" << endl;
+                saveMedicinesToFile();
+                break;
+            }
+        }
+
+        if(!found){
+            cout << "✗ Medicine with ID " << id << " not found!" << endl;
+        }
+    }
+
 
 };
 
@@ -952,6 +1049,12 @@ private:
                     admin->checkAlerts();
                     break;
                 case 7:
+                    admin->sortMedicinesByPrice();
+                    break;
+                case 8:
+                    admin->restockMedicine();
+                    break;
+                case 9:
                     admin->logout();
                     break;
                 default:
