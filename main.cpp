@@ -574,8 +574,8 @@ public:
         cout << "\n" 
          << left << setw(8)  << "ID"
          << left << setw(22) << "Name"        // slightly wider
-         << left << setw(32) << "Company"     // more space for long names
-         << right << setw(15) << "Price"      // right align numeric columns
+         << left << setw(32) << "Company"     
+         << right << setw(15) << "Price"      
          << right << setw(10) << "Quantity"
          << left  << setw(14) << "Expiry" 
          << endl;
