@@ -3,7 +3,7 @@
 1003,Napa Extend,Beximco Pharmaceuticals Ltd.,1.5,1200,27/10/2030
 1004,Napa Extra,Beximco Pharmaceuticals Ltd.,1.8,1198,27/10/2030
 1005,Napa One,Beximco Pharmaceuticals Ltd.,1.8,1200,27/10/2030
-1006,Napa Rapid,Beximco Pharmaceuticals Ltd.,1.8,1200,27/10/2030
+1006,Napa Rapid,Beximco Pharmaceuticals Ltd.,1.8,1199,27/10/2030
 1007,NapaDol,Beximco Pharmaceuticals Ltd.,1.8,1200,27/10/2030
 1008,Ciprofloxacin,Square Pharmaceuticals,5,1200,27/10/2030
 1009,Doxycycline,Square Pharmaceuticals,5.5,1200,27/10/2030
@@ -13,4 +13,4 @@
 1013,Xelosil,Everest Pharmaceuticals Ltd.,2,1200,27/10/2030
 1014,Tylenol,Johnson & Johnson,5,1400,27/10/2030
 1015,Panadol,GlaxoSmithKline,5,1400,27/10/2030
-1016,Ace,Square Pharmaceuticals,1,1500,27/10/2030
+1016,Ace,Square Pharmaceuticals,1,1498,27/10/2030
