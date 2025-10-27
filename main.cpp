@@ -879,6 +879,7 @@ public:
 
             cout << "\nEnter Medicine ID: ";
             cin >> medID;
+            cin.ignore();
 
             bool found = false;
             for(auto& med : *medicineInventory){
@@ -891,23 +892,24 @@ public:
                         break;
                     }
 
-                }
-                cout << "Medicine: " << med.getName() << endl;
-                cout << "Available Quantity: " << med.getQuantity() << endl;
-                cout << "Price: $" << med.getPrice() << endl;
-                cout << "Enter Quantity to sell: ";
-                cin >> qty;
+                    cout << "Medicine: " << med.getName() << endl;
+                    cout << "Available Quantity: " << med.getQuantity() << endl;
+                    cout << "Price: $" << med.getPrice() << endl;
+                    cout << "Enter Quantity to sell: ";
+                    cin >> qty;
 
-                if(qty > med.getQuantity()){
-                    cout << "✗ Error: Insufficient stock!" << endl;
-                }else if (qty <= 0){
-                    cout << "✗ Error: Invalid quantity!" << endl;
-                }else{
-                    med.updateStock(qty);
-                    invoice.addItem(med, qty);
-                    cout << "✓ Added to invoice!" << endl;
+                    if(qty > med.getQuantity()){
+                        cout << "✗ Error: Insufficient stock!" << endl;
+                    }else if (qty <= 0){
+                        cout << "✗ Error: Invalid quantity!" << endl;
+                    }else{
+                        med.updateStock(qty);
+                        invoice.addItem(med, qty);
+                        cout << "✓ Added to invoice!" << endl;
+                    }
+                    break;
                 }
-                break;
+                
             }
             if(!found){
                 cout << "✗ Medicine with ID " << medID << " not found!" << endl;
