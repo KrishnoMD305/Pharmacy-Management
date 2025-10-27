@@ -233,6 +233,11 @@ public:
         return *this;
     }
 
+    // Overloaded < operator for customer class
+    bool operator<(const Customer& other)const{
+        return purchaseCount < other.purchaseCount;
+    }
+
 
     // Getters
     int getCustID()const{ return custID; }
@@ -351,7 +356,9 @@ public:
 
 class Admin : public User {
 private:
-    vector<Medicine>* medicineInventory; 
+    vector<Medicine>* medicineInventory;
+    vector<Customer>* customerList;
+
     void saveMedicinesToFile() {
         ofstream file("medicines.txt");
         if (file.is_open()) {
@@ -363,7 +370,7 @@ private:
     }
 
 public:
-    Admin(int userId, string userName, string userContact, vector<Medicine>* inventory) : User(userId, userName, userContact), medicineInventory(inventory) {}
+    Admin(int userId, string userName, string userContact, vector<Medicine>* inventory, vector<Customer>* customers) : User(userId, userName, userContact), medicineInventory(inventory), customerList(customers) {}
 
     // Display Admin menu
     void display(){
@@ -701,6 +708,18 @@ public:
         if(!found){
             cout << "✗ Medicine with ID " << id << " not found!" << endl;
         }
+    }
+
+    void viewCustomerLoyaltyRanking()const{
+        cout << "\n╔════════════════════════════════════╗" << endl;
+        cout << "║   CUSTOMER LOYALTY RANKING         ║" << endl;
+        cout << "╚════════════════════════════════════╝" << endl;
+
+        if(customerList->empty()){
+            cout << "\nNo customers in database!" << endl;
+            return;
+        }
+
     }
 
 
@@ -1149,7 +1168,7 @@ public:
     // Constructor
     PharmacySystem(){
         // Initializing Users
-        admin = new Admin(23070, "CSE_23", "015", &medicineInventory);
+        admin = new Admin(23070, "CSE_23", "015", &medicineInventory, &customerList);
         pharmacist = new Pharmacist(2307090, "Ritovash Chanda", "01615058161", &medicineInventory, &customerList);
 
         loadMedicinesFromFile();
