@@ -80,7 +80,13 @@ public:
     }
 
     void display()const{
-        cout << left << setw(8) << medID << setw(20) << name<< setw(15) << company << setw(10) << fixed << setprecision(2) << price << setw(10) << quantity << setw(12) << expiryDate;
+        cout << left << setw(8)  << medID
+         << left << setw(22) << name
+         << left << setw(32) << company
+         << right << setw(12) << fixed << setprecision(2) << price
+         << right << setw(10) << quantity
+         << right  << setw(14) << expiryDate
+         << endl;
         if (isExpired()) {
             cout << " [EXPIRED]";
         } else if (isLowStock()) {
@@ -381,9 +387,9 @@ public:
     // Display Admin menu
     void display(){
         cout << "\n";
-        cout << "╔════════════════════════════════════╗" << endl;
-        cout << "║         ADMIN MENU                 ║" << endl;
-        cout << "╚════════════════════════════════════╝" << endl;
+        cout << "\n" << endl;
+        cout << "         ADMIN MENU                 " << endl;
+        cout << "\n" << endl;
         cout << "1. Add Medicine" << endl;
         cout << "2. Remove Medicine" << endl;
         cout << "3. Update Medicine" << endl;
@@ -565,7 +571,14 @@ public:
             return;
         }
 
-        cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << "Status" << endl;
+        cout << "\n" 
+         << left << setw(8)  << "ID"
+         << left << setw(22) << "Name"        // slightly wider
+         << left << setw(32) << "Company"     // more space for long names
+         << right << setw(15) << "Price"      // right align numeric columns
+         << right << setw(10) << "Quantity"
+         << left  << setw(14) << "Expiry" 
+         << endl;
         cout << string(95, '-') << endl;
         for(const auto& med : *medicineInventory){
             med.display();
@@ -809,9 +822,9 @@ public:
 
     // Show Menubar
     void showMenu(){
-        cout << "\n╔════════════════════════════════════╗" << endl;
-        cout << "║       PHARMACIST MENU              ║" << endl;
-        cout << "╚════════════════════════════════════╝" << endl;
+        cout << "\n" << endl;
+        cout << "       PHARMACIST MENU              " << endl;
+        cout << "\n" << endl;
         cout << "1. Sell Medicine" << endl;
         cout << "2. Search Medicine" << endl;
         cout << "3. View Inventory" << endl;
@@ -1242,11 +1255,9 @@ public:
 
 int main(){
     cout << "\n";
-    cout << "╔════════════════════════════════════════════════════════╗" << endl;
-    cout << "║                                                        ║" << endl;
-    cout << "║         WELCOME TO PHARMACY MANAGEMENT SYSTEM          ║" << endl;
-    cout << "║                                                        ║" << endl;
-    cout << "╚════════════════════════════════════════════════════════╝" << endl;
+
+    cout << "         WELCOME TO PHARMACY MANAGEMENT SYSTEM          " << endl;
+    cout << "                                                        " << endl;
     cout << "\n";
 
     PharmacySystem system;
