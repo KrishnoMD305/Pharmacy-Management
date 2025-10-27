@@ -182,7 +182,7 @@ public:
 
     // Discount and purchasecount method
     void incrementPurchase(){
-        purchaseCount++;
+        ++(*this);
     }
     bool isEligibleForDiscount()const{
         return purchaseCount >= 5;
