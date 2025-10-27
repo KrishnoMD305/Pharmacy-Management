@@ -14,3 +14,4 @@
 1014,Tylenol,Johnson & Johnson,5,1400,27/10/2030
 1015,Panadol,GlaxoSmithKline,5,1400,27/10/2030
 1016,Ace,Square Pharmaceuticals,1,1498,27/10/2030
+1017,Bayer Aspirin,Bayer,3,2000,27/10/2030
