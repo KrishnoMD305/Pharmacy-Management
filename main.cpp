@@ -1,3 +1,12 @@
+/*
+2307085
+2307087
+2307088
+2307089
+2307090
+2307091
+*/
+
 #include<iostream>
 #include<string>   // for string manipulation
 #include<algorithm>
