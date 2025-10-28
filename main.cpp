@@ -1096,7 +1096,7 @@ public:
     }
 
     // Checks for expired medicines
-    void checkExpiry() const{
+    void checkExpiry()const{
         cout << "\n╔════════════════════════════════════╗" << endl;
         cout << "║      EXPIRY CHECK REPORT           ║" << endl;
         cout << "╚════════════════════════════════════╝" << endl;
@@ -1105,6 +1105,14 @@ public:
 
         cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(12) << "Expiry Date" << endl;
         cout << string(55, '-') << endl;
+
+        // SHow the expired medicines
+        for (const auto& med : *medicineInventory) {
+            if (med.isExpired()) {
+                hasExpired = true;
+                cout << left << setw(8) << med.getMedID() << setw(20) << med.getName() << setw(15) << med.getCompany() << setw(12) << med.getExpiryDate() << endl;
+            }
+        }
 
         if (!hasExpired) {
             cout << "✓ No expired medicines found!" << endl;
@@ -1127,6 +1135,7 @@ public:
         cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << "Status" << endl;
         cout << string(95, '-') << endl;
 
+        // Showing the medicine
         for(const auto& med : *medicineInventory){
             med.display();
         }
