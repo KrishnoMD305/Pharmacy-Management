@@ -694,6 +694,8 @@ public:
         cout << "\nEXPIRED MEDICINES:" << endl;
         cout << string(80, '-') << endl;
 
+        // we want to just read data, no modify is needed, to ensure that const in used
+        // showing all expired medicine if have any
         for(const auto& med : *medicineInventory){
             if (med.isExpired()) {
                 hasExpired = true;
@@ -707,6 +709,7 @@ public:
         cout << "\nLOW STOCK MEDICINES (< 10 units):" << endl;
         cout << string(80, '-') << endl;
 
+        // showing low stock medicine if have any
         for(const auto& med : *medicineInventory){
             if (med.isLowStock() && !med.isExpired()) {
                 hasLowStock = true;
