@@ -23,10 +23,14 @@ string getCurrentDate(){
     return ss.str();
 }
 
+
+// local broken-down time : the current date and time, expressed in our local time zone, split into components (year, month, day)
+
+// parses a date in the string expiryDate and returns true if that date is strictly before today, otherwise false
 // Function to check expire date of a medicine
 bool isDateExpired(const string& expiryDate){
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+    time_t now = time(0);   // get the current calendar time
+    tm *ltm = localtime(&now);  // convert now to local broken-down time
     int currentDay = ltm->tm_mday;
     int currentMonth = 1 + ltm->tm_mon;
     int currentYear = 1900 + ltm->tm_year;
@@ -34,7 +38,10 @@ bool isDateExpired(const string& expiryDate){
     // Extract the expiry date
     int day, month, year;
     char slash;
-    stringstream ss(expiryDate);
+    stringstream ss(expiryDate);  // creates a stream from the input string
+
+    // the variable slash is used to consume the / characters.
+    // attempts to read three integers separated by two characters
     ss >> day >> slash >> month >> slash >> year;
 
     // Comparing dates
