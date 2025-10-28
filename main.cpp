@@ -1,19 +1,24 @@
 #include<iostream>
-#include<string>
+#include<string>   // for string manipulation
 #include<algorithm>
-#include<ctime>
-#include<sstream>
+#include<ctime>  // for time manipulation
+#include<sstream> // for string stream
 #include<iomanip>
 #include<vector>
 #include<fstream>
 
 using namespace std;
 
+// stringstream treat strings like streams 
+// a stream is simply a flow (or sequence) of data — either going into a program (input) or coming out of a program (output).
+
 // function to get current date
 string getCurrentDate(){
     time_t now = time(0); // returns the current time in seconds since January 1, 1900
     tm *ltm = localtime(&now); // converts that raw time_t into a human-readable local time structure
-    stringstream ss;
+    stringstream ss;  // Creates a std::stringstream object ss so it can be build a string using stream insertion (<<)
+    
+    // reads components from the tm structure and writes them into the stringstream in day/month/year form
     ss << (ltm->tm_mday) << "/" << (1 + ltm->tm_mon) << "/" << (1900 + ltm->tm_year);
     return ss.str();
 }
