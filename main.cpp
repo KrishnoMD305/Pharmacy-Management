@@ -736,15 +736,15 @@ public:
 
         int choice;
         cin >> choice;
-        cin.ignore();
+        cin.ignore();  // // ignore characters left in the input buffer
 
-        vector<Medicine> sortedList = *medicineInventory;
+        vector<Medicine> sortedList = *medicineInventory; // temporary list initialized
 
         // Overloaded operator is used here
         if(choice == 1){
-            sort(sortedList.begin(), sortedList.end());
+            sort(sortedList.begin(), sortedList.end()); // sort function
             cout << "\n✓ Medicines sorted by price (Low to High):" << endl;
-        }else if(choice == 2){
+        }else if(choice == 2){ // uses lambda function
             sort(sortedList.begin(), sortedList.end(), [](const Medicine& a, const Medicine& b){ return a > b; });
             cout << "\n✓ Medicines sorted by price (High to Low):" << endl;
         }else{
@@ -755,7 +755,8 @@ public:
         cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << endl;
         cout << string(85, '-') << endl;
 
-        for(const auto& med : sortedList){
+        // showing the sorted list 
+        for(const auto& med : sortedList){ // uses const so that no modification is allowed
             cout << left << setw(8) << med.getMedID() << setw(20) << med.getName() << setw(15) << med.getCompany() << setw(10) << fixed << setprecision(2) << med.getPrice() << setw(10) << med.getQuantity() << setw(12) << med.getExpiryDate() << endl;
         }
 
