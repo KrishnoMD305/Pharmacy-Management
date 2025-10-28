@@ -283,7 +283,7 @@ public:
 
 
 
-    
+
     // Serialize the customer lists
     string serialize() const {
         stringstream ss;
@@ -308,28 +308,29 @@ public:
     }
 };
 
+// invoice is a bill or record generated whenever a sale or purchase takes place
 class Invoice{
 private: 
     int invoiceID;
     string customerName;
     string date;
     vector<pair<Medicine, int>> items; // Medicine and quantity
-    double totalAmount;
-    double discountAmount;
-    double finalAmount;
+    double totalAmount; // total sales cost
+    double discountAmount; // if there is any discount
+    double finalAmount; // total sales cost after discount if have any
 public:
     // Constructors
     Invoice(int id, const string& custName) : invoiceID(id), customerName(custName), totalAmount(0.0), discountAmount(0.0), finalAmount(0.0) {
-        date = getCurrentDate();
+        date = getCurrentDate(); // extracting current date
     }
 
     // Adding item to invoice
     void addItem(const Medicine& med, int qty) {
-        items.push_back(make_pair(med, qty));
+        items.push_back(make_pair(med, qty)); // aded medicine with quantity
         totalAmount += med.getPrice() * qty;
     }
     // Discount and generate bill
-    void applyDiscount(double discountPercent) {
+    void applyDiscount(double discountPercent) { // calculating discount here
         discountAmount = totalAmount * (discountPercent / 100.0);
         finalAmount = totalAmount - discountAmount;
     }
@@ -341,6 +342,7 @@ public:
     void saveToFile() const{
         ofstream file("invoices.txt", ios::app); // Append mode
         if(file.is_open()){ // Writing to file
+            // writing with a format
             file << invoiceID << "," << customerName << "," << date << "," << totalAmount << "," << discountAmount << "," << (discountAmount > 0 ? finalAmount : totalAmount) << endl;
             file.close();
         }
@@ -348,7 +350,7 @@ public:
     }
 
     // Getter
-    double getFinalAmount() const {
+    double getFinalAmount() const{
         return discountAmount > 0 ? finalAmount : totalAmount;
     }
 
@@ -366,11 +368,13 @@ public:
 
         cout << left << setw(20) << "Medicine" << setw(10) << "Price" << setw(10) << "Quantity" << setw(15) << "Subtotal" << endl;
 
+        // create a string containing 60 dashes
         cout << string(60, '-') << endl;
 
+        // auto is used to internally indicate the datatype of items vector
         for(const auto& item : items){
-            Medicine med = item.first;
-            int qty = item.second;
+            Medicine med = item.first; // Medicine object
+            int qty = item.second; // quantity of the medicine
             double subtotal = med.getPrice() * qty;
 
             // Showing the data
@@ -379,6 +383,7 @@ public:
         cout << string(60, '-') << endl;
         cout << right << setw(45) << "Total: $" << totalAmount << endl;
 
+        // Showing discount price if there is have any
         if(discountAmount > 0){
             cout << right << setw(45) << "Discount: -$" << discountAmount << endl;
             cout << right << setw(45) << "Final Amount: $" << finalAmount << endl;
@@ -386,6 +391,7 @@ public:
             cout << right << setw(45) << "Final Amount: $" << totalAmount << endl;
         }
 
+        // Thank you message
         cout << string(60, '=') << endl;
         cout << "\n      Thank you for your purchase!" << endl;
         cout << string(60, '=') << endl << endl;
