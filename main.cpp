@@ -808,14 +808,16 @@ public:
             return;
         }
 
-        vector<Customer> sortedCustomers = *customerList;
+        vector<Customer> sortedCustomers = *customerList; // temporary list for soting
+        //
+        // uses lambda function
         sort(sortedCustomers.begin(), sortedCustomers.end(), [](const Customer& a, const Customer& b){ return !(a < b); });
 
         cout << "\n" << left << setw(8) << "Rank" << setw(12) << "Cust ID" << setw(20) << "Name" << setw(15) << "Phone" << setw(12) << "Purchases" << "Discount" << endl;
         cout << string(85, '-') << endl;
 
         int rank = 1;
-        for(const auto& cust : sortedCustomers){
+        for(const auto& cust : sortedCustomers){ // we don't allow modification so const is used
             cout << left << setw(8) << rank++ << setw(12) << cust.getCustID() << setw(20) << cust.getName() << setw(15) << cust.getPhone() << setw(12) << cust.getPurchaseCount() << cust.getDiscountPercentage() << "%" << endl;
         }
         cout << "\nTotal Customers: " << customerList->size() << endl;
