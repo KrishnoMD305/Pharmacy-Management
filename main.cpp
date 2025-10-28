@@ -1054,33 +1054,33 @@ public:
 
         int choice;
         cin >> choice;
-        cin.ignore();
+        cin.ignore(); // // ignore characters left in the input buffer
 
         string searchTerm;
         bool found = false;
 
         if(choice == 1){
             cout << "Enter Medicine Name: ";
-            getline(cin, searchTerm);
+            getline(cin, searchTerm); // taking medicine name or keyword of it
 
             cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << endl;
             cout << string(75, '-') << endl;
 
             for (const auto& med : *medicineInventory) {
-                if (med.getName().find(searchTerm) != string::npos) {
+                if (med.getName().find(searchTerm) != string::npos){ // if any keyword is found related to saved medicine then it will return the iterator of it or else no position
                     med.display();
                     found = true;
                 }
             }
         }else if(choice == 2){
             cout << "Enter Company Name: ";
-            getline(cin, searchTerm);
+            getline(cin, searchTerm); // taking company name and keyword of it
 
             cout << "\n" << left << setw(8) << "ID" << setw(20) << "Name" << setw(15) << "Company" << setw(10) << "Price" << setw(10) << "Quantity" << setw(12) << "Expiry" << endl;
             cout << string(75, '-') << endl;
 
             for(const auto& med : *medicineInventory){
-                if (med.getCompany().find(searchTerm) != string::npos) {
+                if (med.getCompany().find(searchTerm) != string::npos){ // // if any keyword is found related to saved medicine then it will return the iterator of it or else no position
                     med.display();
                     found = true;
                 }
