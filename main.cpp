@@ -189,15 +189,18 @@ public:
 
 class User{
 protected:
-    int ID; 
-    string name;
+    int ID;  // stores user id
+    string name; // stores name
     string contact;
-    bool loggedin;
+    bool loggedin; // log in validity
 public:
+    // Constructors
     User(int userID=0, string username="", string usercontact="") : ID(userID),name(username),contact(usercontact), loggedin(false) {}
 
+    // Destructors
     ~User(){}
 
+    // checing log in info
     bool login(int userId, const string& password) {
         if (userId == ID) {
             loggedin = true;
@@ -207,11 +210,13 @@ public:
         return false;
     }
 
+    // logout operation
     void logout() {
         loggedin = false;
         cout << "\n✓ Logged out successfully!" << endl;
     }
 
+    // getters
     int getId() { return ID; }
     string getName() { return name; }
     string getContact() { return contact; }
