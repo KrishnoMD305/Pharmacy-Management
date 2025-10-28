@@ -830,16 +830,26 @@ public:
 // Handles Medicine sells and customers interaction
 class Pharmacist : public User{
 private:
-    vector<Medicine>* medicineInventory;
-    vector<Customer>* customerList;
-    int invoiceCounter;
+    vector<Medicine>* medicineInventory; // a pointer to a vector<Medicine>
+    vector<Customer>* customerList; // a pointer to a vector<Customer>
+    // collection of all Medicine objects available in the pharmacy
+    // collection of all Customer objects registered in the pharmacy
+
+    int invoiceCounter; // count the number of invoices
 
     // Save medicines to file
     void saveMedicinesToFile()const{
+        //output file stream
+        /* 
+        Opens a file for writing 
+        if the file doesn’t exist, it will be created
+        if it exists, its content will be overwritten
+        */
         ofstream file("medicines.txt");
         if (file.is_open()){
             for (const auto& med : *medicineInventory) {
-                file << med.serialize() << endl;
+                // CSV is done by serialize() method
+                file << med.serialize() << endl; // writing in a CSV format 
             }
             file.close();
         }
@@ -847,6 +857,12 @@ private:
 
     // Saving Customer information in file
     void saveCustomersToFile()const{
+        //output file stream
+        /* 
+        Opens a file for writing 
+        if the file doesn’t exist, it will be created
+        if it exists, its content will be overwritten
+        */
         ofstream file("customers.txt");
         if (file.is_open()) {
             for(const auto& cust : *customerList){
@@ -858,18 +874,28 @@ private:
 
     // Load invoice from file
     void loadInvoiceCounter(){
+        // used to read the last saved invoice number so that the program can continue numbering invoices sequentially.
+
+        // input file stream
+
         ifstream file("invoice_counter.txt");
         if(file.is_open()){
-            file >> invoiceCounter;
+            file >> invoiceCounter; // reads the integer value from the file and stores it in invoiceCounter
             file.close();
         }
     }
 
     // Save invoice to file
     void saveInvoiceCounter()const{
+        //output file stream
+        /* 
+        Opens a file for writing 
+        if the file doesn’t exist, it will be created
+        if it exists, its content will be overwritten
+        */
         ofstream file("invoice_counter.txt");
         if(file.is_open()){
-            file << invoiceCounter;
+            file << invoiceCounter; // writes the value of invoiceCounter as text into the file
             file.close();
         }
     }
