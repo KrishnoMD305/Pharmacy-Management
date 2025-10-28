@@ -1154,6 +1154,7 @@ private:
     Pharmacist* pharmacist;
 
 
+    // display the main menu after running 
     void displayMainMenu(){
             cout<<"\n";
             cout << "╔════════════════════════════════════╗" << endl;
