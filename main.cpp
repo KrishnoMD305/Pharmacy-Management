@@ -763,13 +763,13 @@ public:
     }
 
     // For restocking (Overloaded the + operator)
-    void restockMedicine(){
+    void restockMedicine(){ // Restocking means create new quantity for a medicine
         int id, addQty;
 
-        cout << "\n--- Restock Medicine (Using Operator+) ---" << endl;
+        cout << "\n--- Restock Medicine ---" << endl;
         cout << "Enter Medicine ID to restock: ";
         cin >> id;
-        cin.ignore();
+        cin.ignore(); // ignore characters left in the input buffer
 
         bool found = false;
 
@@ -781,13 +781,14 @@ public:
                 cin >> addQty;
                 cin.ignore();
 
+                // restocked medicine
                 Medicine additionalStock(id, med.getName(), med.getCompany(), med.getPrice(), addQty, med.getExpiryDate());
-                Medicine restocked = med + additionalStock;
+                Medicine restocked = med + additionalStock; // usage overloaded operator
                 med = restocked;
 
                 cout << "✓ Medicine restocked successfully!" << endl;
                 cout << "New Stock: " << med.getQuantity() << " units" << endl;
-                saveMedicinesToFile();
+                saveMedicinesToFile(); // saved the restocked medicines
                 break;
             }
         }
