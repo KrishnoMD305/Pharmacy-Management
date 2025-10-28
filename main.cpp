@@ -512,10 +512,11 @@ public:
         cout << "\n--- Update Medicine ---" << endl;
         cout << "Enter Medicine ID to update: ";
         cin >> id;
-        cin.ignore();
+        cin.ignore(); // ignore characters left in the input buffer
 
         bool found = false; 
 
+        // const keyword is not used because medicine will be modified
         for(auto& med : *medicineInventory){
             if(med.getMedID() == id){
                 found = true;
@@ -539,7 +540,7 @@ public:
                 cin.ignore();
 
                 // For storing temporary info
-                string tempStr;
+                string tempStr; // storing name company and expirary date temporarily
                 double tempPrice;
                 int tempQty;
 
@@ -548,7 +549,7 @@ public:
                     case 1:
                         cout << "Enter new name: ";
                         getline(cin, tempStr);
-                        med.setName(tempStr);
+                        med.setName(tempStr); // seting new name using setter
                         break;
                     case 2:
                         cout << "Enter new company: ";
@@ -570,7 +571,7 @@ public:
                         getline(cin, tempStr);
                         med.setExpiryDate(tempStr);
                         break;
-                    case 6:
+                    case 6: // Updating all info at once
                         cout << "Enter new name: ";
                         getline(cin, tempStr);
                         med.setName(tempStr);
@@ -595,7 +596,7 @@ public:
 
                 // Confirmation message
                 cout << "✓ Medicine updated successfully!" << endl;
-                saveMedicinesToFile();
+                saveMedicinesToFile(); // saving the updated medicine list back to file
                 break;
             }
         }
@@ -605,6 +606,7 @@ public:
     }
 
     // Viewing complete inventory
+    // showing details of medicine
     void viewInventory()const{
         cout << "\n╔════════════════════════════════════════════════════════════════════════════════╗" << endl;
         cout << "║                           MEDICINE INVENTORY                                   ║" << endl;
@@ -624,8 +626,9 @@ public:
          << left  << setw(14) << "Expiry" 
          << endl;
         cout << string(95, '-') << endl;
+
         for(const auto& med : *medicineInventory){
-            med.display();
+            med.display(); // displaying for each medicine
         }
 
         cout << "\nTotal Medicines: " << medicineInventory->size() << endl;
