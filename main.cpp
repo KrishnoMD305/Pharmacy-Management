@@ -407,17 +407,22 @@ private:
     vector<Medicine>* medicineInventory; // medicineInventory is a pointer to a vector<Medicine>
     vector<Customer>* customerList; // customerList is a pointer to a vector<Customer>
 
-    void saveMedicinesToFile() {
+    void saveMedicinesToFile(){
+        // Opens a file for writing 
+        // if the file doesn’t exist, it will be created
+        // if it exists, its content will be overwritten
         ofstream file("medicines.txt");
-        if (file.is_open()) {
-            for (const auto& med : *medicineInventory) {
-                file << med.serialize() << endl;
+
+        if (file.is_open()){ // checks if the file was successfully opened.
+            for (const auto& med : *medicineInventory){ // dereferences the pointer to access the actual vector of Medicine objects
+                file << med.serialize() << endl;   // converts the Medicine object into a single string CSV-style
             }
             file.close();
         }
     }
 
 public:
+    // Constructor
     Admin(int userId, string userName, string userContact, vector<Medicine>* inventory, vector<Customer>* customers) : User(userId, userName, userContact), medicineInventory(inventory), customerList(customers) {}
 
     // Display Admin menu
