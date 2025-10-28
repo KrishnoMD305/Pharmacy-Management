@@ -401,8 +401,11 @@ public:
 
 class Admin : public User {
 private:
-    vector<Medicine>* medicineInventory;
-    vector<Customer>* customerList;
+    // stores collection of all Medicine objects available in the pharmacy
+    // stores collection of all Customer objects registered in the pharmacy
+
+    vector<Medicine>* medicineInventory; // medicineInventory is a pointer to a vector<Medicine>
+    vector<Customer>* customerList; // customerList is a pointer to a vector<Customer>
 
     void saveMedicinesToFile() {
         ofstream file("medicines.txt");
