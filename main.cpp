@@ -1146,6 +1146,7 @@ public:
 
 };
 
+// combination of all classes happen here 
 class PharmacySystem{
 private:
     vector<Medicine> medicineInventory;
@@ -1373,6 +1374,8 @@ public:
 
 };
 
+
+// main function to control the whole 
 int main(){
     cout << "\n";
 
