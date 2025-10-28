@@ -925,23 +925,24 @@ public:
         string custName, custPhone;
         int custID = 0;
         bool isExistingCustomer = false;
-        Customer* currentCustomer = nullptr;
+        Customer* currentCustomer = nullptr; // declare a temporary empty customer so that we can directly push back to customer list
 
         cout << "\n--- Sell Medicine ---" << endl;
         cout << "Is this an existing customer? (y/n): ";
         char choice;
         cin >> choice;
-        cin.ignore();
+        cin.ignore(); // ignore characters left in the input buffer
 
+        // If it is an existing cutomer
         if(choice == 'y' || choice == 'Y'){
             cout << "Enter Customer Phone: ";
             getline(cin, custPhone); // For searching
 
             // Searching for existing customer
             for(auto& cust : *customerList){
-                if(cust.getPhone() == custPhone){
+                if(cust.getPhone() == custPhone){ // if phone number matched
                     isExistingCustomer = true;
-                    currentCustomer = &cust;
+                    currentCustomer = &cust; // geting customer info into the temporary variable
                     custID = cust.getCustID();
                     custName = cust.getName();
                     cout << "✓ Customer found: " << custName << endl;
@@ -949,6 +950,7 @@ public:
                 }
             }
 
+            // if not a existing customer
             if (!isExistingCustomer) {
                 cout << "✗ Customer not found. Creating new customer..." << endl;
             }
@@ -956,24 +958,28 @@ public:
 
         // Creating new customers if not existed
         if(!isExistingCustomer){
-            custID = customerList->size() + 1;
+            custID = customerList->size() + 1; // customers are numbered 1,2,3,....
             cout << "Enter Customer Name: ";
             getline(cin, custName);
             cout << "Enter Customer Phone: ";
             getline(cin, custPhone);
 
+            // Creating new customer object
             Customer newCust(custID, custName, custPhone, 0);
-            customerList->push_back(newCust);
-            currentCustomer = &customerList->back();
-            saveCustomersToFile();
+            customerList->push_back(newCust); // push it to customer list
+            currentCustomer = &customerList->back(); // returns the reference of the last element
+            // as the currently added customer is in the last element of the vector
+            
+            saveCustomersToFile(); // saving the updated customer list
         }
 
         // Create Invoice
-        Invoice invoice(invoiceCounter++, custName);
+        Invoice invoice(invoiceCounter++, custName); // saving invoice with invoice number and customer name
 
         // Add medicines to invoice
         char addMore = 'y';
 
+        // Medicine addition to customer
         while(addMore == 'y' || addMore == 'Y'){
             int medID, qty;
 
@@ -996,25 +1002,29 @@ public:
                     cout << "Available Quantity: " << med.getQuantity() << endl;
                     cout << "Price: $" << med.getPrice() << endl;
                     cout << "Enter Quantity to sell: ";
-                    cin >> qty;
+                    cin >> qty; // take the quantity of how much a customer want
 
+                    // showing error message for low stock and invalid quantity
                     if(qty > med.getQuantity()){
                         cout << "✗ Error: Insufficient stock!" << endl;
                     }else if (qty <= 0){
                         cout << "✗ Error: Invalid quantity!" << endl;
                     }else{
-                        med.updateStock(qty);
-                        invoice.addItem(med, qty);
+                        med.updateStock(qty); // update the stock to new quantity 
+                        invoice.addItem(med, qty); // update item in the invoice
                         cout << "✓ Added to invoice!" << endl;
                     }
                     break;
                 }
                 
             }
+            //
+            // Error message
             if(!found){
                 cout << "✗ Medicine with ID " << medID << " not found!" << endl;
             }
 
+            // If more medicine in needed loop will continue 
             cout << "\nAdd more medicines? (y/n): ";
             cin >> addMore;
         }
@@ -1023,7 +1033,7 @@ public:
         double discount = currentCustomer->getDiscountPercentage();
         invoice.generateBill(discount);
         invoice.printInvoice();
-        invoice.saveToFile();
+        invoice.saveToFile(); 
 
         currentCustomer->incrementPurchase(); // Updating customer purchase count
 
