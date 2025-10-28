@@ -12,7 +12,7 @@
 #include<algorithm>
 #include<ctime>  // for time manipulation
 #include<sstream> // for string stream
-#include<iomanip>
+#include<iomanip> // input output manipulation
 #include<vector>
 #include<fstream>
 
