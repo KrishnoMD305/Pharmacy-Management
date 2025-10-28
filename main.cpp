@@ -640,6 +640,9 @@ public:
         cout << "║         SALES REPORTS              ║" << endl;
         cout << "╚════════════════════════════════════╝" << endl;
 
+        // input file stream
+        // used to read data from files
+        // opens the file in read mode
         ifstream file("invoices.txt"); // Opening file
         if(!file.is_open()){
             cout << "\nNo sales data available!" << endl;
@@ -653,18 +656,22 @@ public:
         cout << "\n" << left << setw(12) << "Invoice ID" << setw(20) << "Customer" << setw(15) << "Date" << setw(15) << "Amount" << endl;
         cout << string(62, '-') << endl;
 
-        while(getline(file, line)){
+        while(getline(file, line)){ // reads the file line by line into the string line
             stringstream ss(line);
             string token;
             vector<string> tokens;
 
-            while (getline(ss, token, ',')) {
+            // tokenizing the line
+            // splits the line by commas into individual pieces
+            while (getline(ss, token, ',')){ 
                 tokens.push_back(token);
             }
 
+            // ensures the line has exactly 6 fields
+            // prevents errors if the line is malformed or missing data
             if(tokens.size() == 6){
                 cout << left << setw(12) << tokens[0] << setw(20) << tokens[1] << setw(15) << tokens[2] << "$" << setw(14) << tokens[5] << endl;
-                totalSales += stod(tokens[5]);
+                totalSales += stod(tokens[5]); // converts the total price (string) to a double
                 totalInvoices++;
             }
         }
