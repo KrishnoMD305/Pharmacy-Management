@@ -1175,13 +1175,13 @@ private:
         cout << "\n--- Admin Login ---" << endl;
         cout << "Enter Admin ID: ";
         cin >> id;
-        cin.ignore();
+        cin.ignore(); // ignore characters left in the input buffer
         cout << "Enter Password: ";
         getline(cin, password);
 
         // Brute force authentication for admin log in 
         if(admin->login(id, password)){
-            adminMenu();
+            adminMenu(); // menu selection method
         }else{
             cout << "\n Invalid credentials!" << endl;
         }
@@ -1196,8 +1196,9 @@ private:
 
             int choice;
             cin >> choice;
-            cin.ignore();
+            cin.ignore(); // ignore characters left in the input buffer
 
+            // selecting method by choicing 
             switch(choice){
                 case 1:
                     admin->addMedicine();
@@ -1243,13 +1244,13 @@ private:
         cout << "\n--- Pharmacist Login ---" << endl;
         cout << "Enter Pharmacist ID: ";
         cin >> id;
-        cin.ignore();
+        cin.ignore();  // // ignore characters left in the input buffer
         cout << "Enter Password: ";
         getline(cin, password);
 
         // Brute Force authentication for pharmacist log in
         if(pharmacist->login(id, password)){
-            pharmacistMenu();
+            pharmacistMenu(); // log in menu operation 
         }else{
             cout << "\n Invalid credentials!" << endl;
         }
@@ -1262,8 +1263,9 @@ private:
 
             int choice;
             cin >> choice;
-            cin.ignore();
+            cin.ignore(); // ignore characters left in the input buffer
 
+            // choicing method by selecting switch cases
             switch (choice) {
                 case 1:
                     pharmacist->sellMedicine();
@@ -1288,11 +1290,14 @@ private:
 
     // Load Medicines Info from file
     void loadMedicinesFromFile(){
+        // input file stream
+
+
         ifstream file("medicines.txt");
-        if (file.is_open()) {
+        if (file.is_open()){
             string line;
-            while (getline(file, line)) {
-                Medicine med = Medicine::deserialize(line);
+            while (getline(file, line)){ // reads one line at a time from the file
+                Medicine med = Medicine::deserialize(line); // converts the csv file into medicine object 
                 if (med.getMedID() != 0) {
                     medicineInventory.push_back(med);
                 }
@@ -1303,10 +1308,11 @@ private:
     
     // Load Customers info from file
     void loadCustomersFromFile(){
+        // input file stream 
         ifstream file("customers.txt");
-        if (file.is_open()) {
+        if (file.is_open()){
             string line;
-            while (getline(file, line)) {
+            while (getline(file, line)){
                 Customer cust = Customer::deserialize(line);
                 if (cust.getCustID() != 0) {
                     customerList.push_back(cust);
@@ -1321,20 +1327,26 @@ public:
     // Constructor
     PharmacySystem(){
         // Initializing Users
+        // Admin info
         admin = new Admin(23070, "CSE_23", "015", &medicineInventory, &customerList);
+        
+        // Pharmacist info 
         pharmacist = new Pharmacist(2307090, "Ritovash Chanda", "01615058161", &medicineInventory, &customerList);
 
-        loadMedicinesFromFile();
-        loadCustomersFromFile();
+
+        loadMedicinesFromFile(); // load medicine to medicine inventory
+        loadCustomersFromFile(); // load customers info to customerlist
 
     }
 
+    // main menu running option 
+    // loop through the choices and methods
     void run(){
         while(true){
             displayMainMenu();
             int choice;
             cin >> choice;
-            cin.ignore();
+            cin.ignore();  // ignore characters left in the input buffer
 
             switch (choice){
                 case 1:
@@ -1354,7 +1366,8 @@ public:
 
     // Destructor
     ~PharmacySystem(){
-        delete admin;
+        // deleting the pointers
+        delete admin;  //
         delete pharmacist;
     }
 
