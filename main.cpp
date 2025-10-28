@@ -122,25 +122,24 @@ public:
         return ss.str();
     }
 
+
+    // static is used so that it can be called without creating an object
+    // takes a string (previously created by serialize()) and converts it back into a Medicine object by extracting each field value from the string
     // Deserialize from string
     static Medicine deserialize(const string& data) {
-        stringstream ss(data);
-        string token;
-        vector<string> tokens;
+        stringstream ss(data); // allows reading character-by-character from the string
+        string token; // temporary string to hold each piece
+        vector<string> tokens; // 
 
-        while (getline(ss, token, ',')) {
+        // reads characters from ss until a comma is found
+        while (getline(ss, token, ',')){
             tokens.push_back(token);
         }
 
-        if (tokens.size() == 6) {
-            return Medicine(
-                stoi(tokens[0]),
-                tokens[1],
-                tokens[2],
-                stod(tokens[3]),
-                stoi(tokens[4]),
-                tokens[5]
-            );
+        // there must be exactly 6 fields
+        // prevents errors if the string is incomplete
+        if (tokens.size() == 6){
+            return Medicine(stoi(tokens[0]), tokens[1], tokens[2], stod(tokens[3]), stoi(tokens[4]), tokens[5]);
         }
         return Medicine();
     }
