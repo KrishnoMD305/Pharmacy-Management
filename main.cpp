@@ -453,7 +453,7 @@ public:
         cout << "\n--- Add New Medicine ---" << endl;
         cout << "Enter Medicine ID: ";
         cin >> id;
-        cin.ignore();
+        cin.ignore(); // ignore characters left in the input buffer
 
         // Checking if medicine is already exists 
         for (const auto& med : *medicineInventory) {
@@ -463,6 +463,7 @@ public:
             }
         }
 
+        // taking input
         cout << "Enter Medicine Name: ";
         getline(cin, name);
         cout << "Enter Company: ";
@@ -479,7 +480,7 @@ public:
         medicineInventory->push_back(newMed); // Adding 
 
         cout << "✓ Medicine added successfully!" << endl;
-        saveMedicinesToFile();
+        saveMedicinesToFile(); // called saving method
     }
 
 
@@ -491,13 +492,15 @@ public:
         cin >> id;
 
         // Search medicine
+        // mark for removal any medicine whose ID is matched
+        // returns a iterator of that medicine if found or else returns a end iterator if not fount
         auto it = remove_if(medicineInventory->begin(), medicineInventory->end(), [id](const Medicine& med) { return med.getMedID() == id; });
 
         // Removing medicine
         if(it != medicineInventory->end()){
             medicineInventory->erase(it, medicineInventory->end());
             cout << "✓ Medicine removed successfully!" << endl;
-            saveMedicinesToFile();
+            saveMedicinesToFile(); // saving the updated list after removal
         }else{
             cout << "✗ Medicine with ID " << id << " not found!" << endl;
         }
