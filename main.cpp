@@ -227,8 +227,8 @@ public:
 
 class Customer{
 private:
-    int custID;
-    string name;
+    int custID;  // stores customer ID
+    string name; // stores name of the customer
     string phone;
     int purchaseCount; // For discount checking
 
@@ -244,8 +244,8 @@ public:
         return purchaseCount >= 5;
     }
     double getDiscountPercentage()const{
-        if (purchaseCount >= 10) return 10.0;
-        if (purchaseCount >= 5) return 5.0;
+        if (purchaseCount >= 10) return 10.0; // 10% discount
+        if (purchaseCount >= 5) return 5.0;  // 5% discount
         return 0.0;
     }
 
@@ -281,6 +281,9 @@ public:
     string getPhone()const{ return phone; }
     int getPurchaseCount()const{ return purchaseCount; }
 
+
+
+    
     // Serialize the customer lists
     string serialize() const {
         stringstream ss;
