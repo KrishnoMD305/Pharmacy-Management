@@ -53,12 +53,12 @@ bool isDateExpired(const string& expiryDate){
 
 class Medicine{
 private:
-    int medID;
-    string name;
-    string company;
+    int medID;  // stores medicine ID
+    string name; 
+    string company; // stores medicine manifucturer company
     double price;
     int quantity;
-    string expiryDate;
+    string expiryDate; // store the expirary date of the medicine
 
 public:
     // Constructor
@@ -67,7 +67,7 @@ public:
     // Update stock after selling
     bool updateStock(int soldQty) {
         if (soldQty <= quantity) {
-            quantity -= soldQty;
+            quantity -= soldQty; // selling means stock will be decreased
             return true;
         }
         return false;
@@ -75,9 +75,10 @@ public:
 
     // Add stock
     void addStock(int addQty) {
-        quantity += addQty;
+        quantity += addQty; // in stock the quantity will be increased
     }
 
+    // if the quantity of any medicine is less than 10 then it will be considered as low stock
     bool isLowStock() const {
         if(quantity < 10){
             return true;
@@ -88,9 +89,10 @@ public:
 
     // Checking expirary date of a medicine
     bool isExpired()const{
-        return isDateExpired(expiryDate);
+        return isDateExpired(expiryDate); // compare current date with expirary date
     }
 
+    // display the console format of showing medicine
     void display()const{
         cout << left << setw(8)  << medID
          << left << setw(22) << name
@@ -107,9 +109,15 @@ public:
         cout << endl;
     }
 
+
+    // serializes the object into a CSV-style line
+    //builds a single comma-separated string containing the member values and returns it
     // Serialize the strings
     string serialize() const {
         stringstream ss;
+
+        // the << operator inserts each member value into the stream in that exact order
+        //between each field a comma is inserted, producing a commaseparated line
         ss << medID << "," << name << "," << company << "," << price << "," << quantity << "," << expiryDate;
         return ss.str();
     }
