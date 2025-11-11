@@ -97,7 +97,7 @@ This Pharmacy Management System is designed to streamline pharmacy operations by
 
 3. **Run the Application**
    ```bash
-   ./pharmacy_system
+   ./main
    ```
 
 ## 📖 Usage
